@@ -1,11 +1,135 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>cashier Menu</title>
-</head>
-<body>
-	<script src="cashierMenu.js"></script>
-</body>
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interface caisse</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top-nav">
+      <button id="btn-deconnexion" class="btn btn-cyan">Déconnexion</button>
+      <button class="btn btn-pink-outline">Menu</button>
+      <button class="btn btn-blue">Produits Unitaire</button>
+    </header>
+
+    <main class="main-container">
+      <aside class="sidebar">
+        <h2 class="sidebar-title">Panier</h2>
+        <div class="cart-items">
+          <div class="cart-card">
+            <p class="item-name">Lorem</p>
+            <div class="image-placeholder"></div>
+            <p class="item-price">12,50 €</p>
+            <div class="qty-controls">
+              <button class="qty-btn-icon">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+              <span class="qty-value">1</span>
+              <button class="qty-btn-icon">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="cart-card">
+            <p class="item-name">Lorem</p>
+            <div class="image-placeholder"></div>
+            <p class="item-price">12,50 €</p>
+            <div class="qty-controls">
+              <button class="qty-btn-icon">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+              <span class="qty-value">1</span>
+              <button class="qty-btn-icon">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="products-grid">
+        <div class="product-card">
+          <div class="image-placeholder-large"></div>
+          <div class="product-info">
+            <span>Menu 1</span>
+            <span>12,85 €</span>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="image-placeholder-large"></div>
+          <div class="product-info">
+            <span>Menu 2</span>
+            <span>12,85 €</span>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="image-placeholder-large"></div>
+          <div class="product-info">
+            <span>Menu 3</span>
+            <span>12,85 €</span>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="image-placeholder-large"></div>
+          <div class="product-info">
+            <span>Menu 4</span>
+            <span>12,85 €</span>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="image-placeholder-large"></div>
+          <div class="product-info">
+            <span>Menu 5</span>
+            <span>12,85 €</span>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="image-placeholder-large"></div>
+          <div class="product-info">
+            <span>Menu 6</span>
+            <span>12,85 €</span>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="image-placeholder-large"></div>
+          <div class="product-info">
+            <span>Menu 7</span>
+            <span>12,85 €</span>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="image-placeholder-large"></div>
+          <div class="product-info">
+            <span>Menu 8</span>
+            <span>12,85 €</span>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="image-placeholder-large"></div>
+          <div class="product-info">
+            <span>Menu 9</span>
+            <span>12,85 €</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bottom-bar">
+      <button class="btn-commander">Commander</button>
+      <div class="total-display">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="total-amount">0,0 €</span>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
 </html>
