@@ -5,7 +5,7 @@ export default class Product {
 		this.price = price;
 		this.quantity = 0;
 		this.type = null; //hot, cold, soft
-		
+		this.isActive = true;
 	}
 	//quantity
 	addQuantity(quantity) {

@@ -9,6 +9,7 @@ class Menu {
 	}
 	addProduct(product) {
 		if(this.allowedTypes.includes(product.type)) {
+			this.deletType(product.type);
 			this.productsList.push(product);
 		}
 	}
@@ -21,7 +22,7 @@ class Menu {
 		this.allowedTypes.splice(index, 1);
 	}
 }
-/*
+
 let p = new Product("pasta", 10);
 p.addQuantity(10);
 p.setType("cold");
@@ -31,15 +32,14 @@ pr.addQuantity(10);
 pr.removeQuantity(2);
 pr.setType("hot");
 
+let bla = new Product("tea", 2);
+bla.addQuantity(4);
+bla.setType("soft");
+
 let m = new Menu();
-console.log("allowed Types", m.allowedTypes);
-console.log("delet type");
-m.deletType("cold");
-console.log("allowed Types", m.allowedTypes);
 m.addProduct(p);
 m.addProduct(pr);
+m.addProduct(bla);
 console.log(m.productsList);
-m.removeProduct(pr);
-console.log(m.productsList);
-*/
+console.log(m.allowedTypes);
 
