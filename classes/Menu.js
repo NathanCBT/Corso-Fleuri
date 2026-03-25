@@ -3,7 +3,7 @@ class Menu {
 	constructor() {
 		this.name;
 		this.productsList = [];
-		this.allowedTypes = Product.TYPES;
+		this.allowedTypes = [...Product.TYPES];
 		//menu can be desactivate
 		this.isActive = true;
 	}
@@ -15,11 +15,21 @@ class Menu {
 	}
 	removeProduct(product) {
 		const index = this.productsList.indexOf(product);
-		this.productsList.splice(index, 1);
-	}
+		//if product is found
+		if(index != -1) {
+			this.productsList.splice(index, 1);
+			this.addType(product.type);
+		}
+	}	
 	deletType(type) {
 		const index = this.allowedTypes.indexOf(type);
-		this.allowedTypes.splice(index, 1);
+		//if type is found in array
+		if(index != -1) {
+			this.allowedTypes.splice(index, 1);
+		}
+	}
+	addType(type) {
+		this.allowedTypes.push(type);
 	}
 }
 
@@ -40,6 +50,12 @@ let m = new Menu();
 m.addProduct(p);
 m.addProduct(pr);
 m.addProduct(bla);
+m.removeProduct(pr);
 console.log(m.productsList);
 console.log(m.allowedTypes);
+
+let lu = new Menu();
+lu.addProduct(pr);
+console.log(lu.productsList);
+console.log(lu.allowedTypes);
 
