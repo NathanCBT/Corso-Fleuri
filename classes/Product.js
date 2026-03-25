@@ -1,10 +1,11 @@
-class Product {
+export default class Product {
+	static TYPES = ["cold", "hot", "soft"];
 	constructor(name, price) {
 		this.name = name;
 		this.price = price;
 		this.quantity = 0;
-		this.category = null; //hot, cold, soft
-		this.types = ["cold", "hot", "soft"];
+		this.type = null; //hot, cold, soft
+		
 	}
 	//quantity
 	addQuantity(quantity) {
@@ -13,10 +14,10 @@ class Product {
 	removeQuantity(quantity) {
 		this.quantity -= quantity;
 	}
-	//category
-	setCategory(type) {
-		if (this.types.includes(type)) {
-			this.category = type;
+	//type
+	setType(type) {
+		if (Product.TYPES.includes(type)) {
+			this.type = type;
 		}
 	}
 
