@@ -13,8 +13,8 @@
   <body>
     <header class="top-nav">
       <button id="btn-deconnexion" class="btn btn-cyan">Déconnexion</button>
-      <button class="btn btn-pink-outline">Menu</button>
-      <button class="btn btn-blue">Produits Unitaire</button>
+      <button id="btn-menu" class="btn btn-pink-outline">Menu</button>
+      <button class="btn btn-blue" id="btn-products">Produits Unitaire</button>
     </header>
 
     <main class="main-container">
@@ -52,74 +52,7 @@
         </div>
       </aside>
 
-      <section class="products-grid">
-        <div class="product-card">
-          <div class="image-placeholder-large"></div>
-          <div class="product-info">
-            <span>Menu 1</span>
-            <span>12,85 €</span>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="image-placeholder-large"></div>
-          <div class="product-info">
-            <span>Menu 2</span>
-            <span>12,85 €</span>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="image-placeholder-large"></div>
-          <div class="product-info">
-            <span>Menu 3</span>
-            <span>12,85 €</span>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="image-placeholder-large"></div>
-          <div class="product-info">
-            <span>Menu 4</span>
-            <span>12,85 €</span>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="image-placeholder-large"></div>
-          <div class="product-info">
-            <span>Menu 5</span>
-            <span>12,85 €</span>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="image-placeholder-large"></div>
-          <div class="product-info">
-            <span>Menu 6</span>
-            <span>12,85 €</span>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="image-placeholder-large"></div>
-          <div class="product-info">
-            <span>Menu 7</span>
-            <span>12,85 €</span>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="image-placeholder-large"></div>
-          <div class="product-info">
-            <span>Menu 8</span>
-            <span>12,85 €</span>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="image-placeholder-large"></div>
-          <div class="product-info">
-            <span>Menu 9</span>
-            <span>12,85 €</span>
-          </div>
-        </div>
-      </section>
+      <section id="main-grid" class="products-grid"></section>
     </main>
 
     <footer class="bottom-bar">
@@ -130,6 +63,21 @@
       </div>
     </footer>
 
-    <script src="script.js"></script>
+    <div id="modal-logout" class="modal-overlay">
+      <div class="modal-content">
+        <i
+          class="fa-solid fa-circle-exclamation"
+          style="font-size: 3rem; color: var(--pink); margin-bottom: 15px"
+        ></i>
+        <h2>Se déconnecter ?</h2>
+        <p>Voulez-vous vraiment quitter la session en cours ?</p>
+        <div class="modal-buttons">
+          <button id="confirm-logout" class="btn btn-pink">Oui</button>
+          <button id="cancel-logout" class="btn btn-gray">Non</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="cashierMenu.js"></script>
   </body>
 </html>
