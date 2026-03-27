@@ -20,36 +20,7 @@
     <main class="main-container">
       <aside class="sidebar">
         <h2 class="sidebar-title">Panier</h2>
-        <div class="cart-items">
-          <div class="cart-card">
-            <p class="item-name">Lorem</p>
-            <div class="image-placeholder"></div>
-            <p class="item-price">12,50 €</p>
-            <div class="qty-controls">
-              <button class="qty-btn-icon">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-              <span class="qty-value">1</span>
-              <button class="qty-btn-icon">
-                <i class="fa-solid fa-plus"></i>
-              </button>
-            </div>
-          </div>
-          <div class="cart-card">
-            <p class="item-name">Lorem</p>
-            <div class="image-placeholder"></div>
-            <p class="item-price">12,50 €</p>
-            <div class="qty-controls">
-              <button class="qty-btn-icon">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-              <span class="qty-value">1</span>
-              <button class="qty-btn-icon">
-                <i class="fa-solid fa-plus"></i>
-              </button>
-            </div>
-          </div>
-        </div>
+        <div id="cart-container" class="cart-items"></div>
       </aside>
 
       <section id="main-grid" class="products-grid"></section>
@@ -78,6 +49,6 @@
       </div>
     </div>
 
-    <script src="cashierMenu.js"></script>
+    <script type="module" src="cashierMenu.js"></script>
   </body>
 </html>
