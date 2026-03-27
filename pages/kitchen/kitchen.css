@@ -1,0 +1,220 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #f5f4f0;
+  --white: #ffffff;
+  --text: #000000;
+  --red: #e8243c;
+  --blue: #1a3a8f;
+  --shadow: 0 4px 24px rgba(0,0,0,0.07);
+  --radius: 16px;
+}
+
+body {
+  font-family: 'Playfair Display', serif;
+  background: var(--bg);
+  min-height: 100vh;
+  padding: 20px 24px 40px;
+}
+
+.logo {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  width: 68px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  z-index: 10;
+}
+.logo img { width: 100%; display: block; }
+
+.header {
+  text-align: center;
+  margin-bottom: 24px;
+  padding-top: 6px;
+}
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-size: 28px;
+  color: var(--text);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 18px;
+  align-items: start;
+}
+
+.ventes-col {
+  grid-column: 3;
+  grid-row: 1 / 3;
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeUp 0.35s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.order-num {
+  font-size: 13px;
+  font-weight: 400;
+  color: #999;
+  border-bottom: 1px solid #f0efeb;
+  padding-bottom: 10px;
+}
+.order-num span {
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--text);
+  margin-left: 4px;
+}
+
+.plats {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.plats li {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid #f0efeb;
+}
+.plats li:last-child { border-bottom: none; }
+
+.qty {
+  font-size: 12px;
+  font-weight: 500;
+  color: #999;
+  background: #f5f4f0;
+  padding: 2px 8px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.historique-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  animation: fadeUp 0.35s ease both;
+  height: 100%;
+}
+
+.histo-title {
+  padding: 16px 18px;
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  border-bottom: 1px solid #e8e6e0;
+  background: #f5f4f0;
+}
+
+.histo-list { list-style: none; }
+
+.histo-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 18px;
+  border-bottom: 1px solid #f0efeb;
+  transition: background 0.15s;
+}
+.histo-row:last-child { border-bottom: none; }
+.histo-row:hover { background: #fafaf8; }
+
+.histo-row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.histo-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.rank-badge { font-size: 16px; flex-shrink: 0; }
+
+.rank-other {
+  font-size: 11px;
+  font-weight: 600;
+  color: #999;
+  background: #f0efeb;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.histo-total {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--blue);
+}
+
+.histo-bar-wrap {
+  background: #f0efeb;
+  border-radius: 999px;
+  height: 5px;
+  overflow: hidden;
+}
+.histo-bar {
+  height: 100%;
+  border-radius: 999px;
+  background: #9ab0e0;
+}
+.rank-1 .histo-bar { background: #1a3a8f; }
+.rank-2 .histo-bar { background: #3a5abf; }
+.rank-3 .histo-bar { background: #6a8acf; }
+
+.histo-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: #f5f4f0;
+  border-top: 1.5px solid #e0ded8;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #999;
+}
+.histo-grand-total {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text);
+}

@@ -18,17 +18,18 @@
       <h1>Connectez-vous</h1>
 
       <div class="input-row">
-        <form method="POST">
-    		<input type="password" name="password" placeholder="Mot de passe">
-		</form>
-        <button class="btn-check" title="Valider">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <polyline points="20 6 9 17 4 12"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </div>
+        <!-- Remplace la section input-row par ça : -->
+<div class="input-row">
+  <input type="password" name="password" placeholder="Mot de passe">
+  <button class="btn-check" title="Valider">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+  </button>
+</div>
+
+<!-- Avant </body> : -->
+<script src="form.js"></script>
 
 </body>
 </html>
