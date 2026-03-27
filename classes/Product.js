@@ -1,18 +1,14 @@
 export default class Product {
 	static TYPES = ["cold", "hot", "soft"];
-	constructor(name, price) {
-		this.name = name;
-		this.price = price;
+	static productList = [];
+	constructor() {
+		this.name;
+		this.price;
 		this.quantity = 0;
 		this.type = null; //hot, cold, soft
+		this.img;
 		this.isActive = true;
-	}
-	//quantity
-	addQuantity(quantity) {
-		this.quantity += quantity;
-	}
-	removeQuantity(quantity) {
-		this.quantity -= quantity;
+		Product.productList.push(this);
 	}
 	//type
 	setType(type) {
@@ -20,5 +16,4 @@ export default class Product {
 			this.type = type;
 		}
 	}
-
 }

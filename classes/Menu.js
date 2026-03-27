@@ -1,5 +1,4 @@
-import Product from "./Product.js";
-class Menu {
+export default class Menu {
 	constructor(name) {
 		this.name = name;
 		this.productsList = [];
@@ -49,37 +48,3 @@ class Menu {
 		}
 	}
 }
-/*
-TESTS MENU PRODUCTS
-let p = new Product("pasta", 10);
-p.addQuantity(10);
-p.setType("cold");
-
-let pr = new Product("chipo", 12.3);
-pr.addQuantity(10);
-pr.removeQuantity(2);
-pr.setType("hot");
-
-let bla = new Product("tea", 2);
-bla.addQuantity(4);
-bla.setType("soft");
-
-let m = new Menu("m");
-
-m.addProduct(p);
-m.addProduct(pr);
-m.addProduct(bla);
-m.addProduct(bla);
-m.addProduct(bla);
-m.removeProduct(pr);
-console.log(m);
-
-let lu = new Menu("lu");
-lu.removeAllowedType("hot");
-lu.removeAllowedType("soft");
-lu.addAllowodType("toto");
-lu.addAllowodType("hot");
-lu.addProduct(pr);
-lu.addProduct(bla);
-console.log(lu);
-*/
