@@ -12,9 +12,12 @@
   </head>
   <body>
     <header class="top-nav">
-      <button id="btn-deconnexion" class="btn btn-cyan">Déconnexion</button>
-      <button id="btn-menu" class="btn btn-pink-outline">Menu</button>
-      <button class="btn btn-blue" id="btn-products">Produits Unitaire</button>
+      <button class="btn btn-cyan" id="btn-grande-faim">Grande Faim</button>
+      <button class="btn btn-blue" id="btn-petite-faim">Petite Faim</button>
+      <button class="btn btn-pink-outline" id="btn-products">
+        Produits Unitaire
+      </button>
+      <button class="btn btn-gray" id="btn-deconnexion">Déconnexion</button>
     </header>
 
     <main class="main-container">
@@ -45,6 +48,88 @@
         <div class="modal-buttons">
           <button id="confirm-logout" class="btn btn-pink">Oui</button>
           <button id="cancel-logout" class="btn btn-gray">Non</button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="payment-view"
+      style="
+        display: none;
+        height: 100vh;
+        width: 100vw;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: var(--bg-light);
+        z-index: 50;
+      "
+    >
+      <header class="top-nav">
+        <button class="btn btn-blue" id="btn-back-to-menu">
+          <i class="fa-solid fa-arrow-left"></i> Retour aux menus
+        </button>
+        <button class="btn btn-gray" id="btn-deconnexion-pay">
+          Déconnexion
+        </button>
+      </header>
+
+      <main class="main-container">
+        <aside class="sidebar" id="sidebar-payment"></aside>
+
+        <section class="payment-grid">
+          <div class="calculator">
+            <div class="calc-display">0.00</div>
+            <div class="calc-buttons">
+              <button class="calc-btn clear">C</button>
+              <button class="calc-btn operator">/</button>
+              <button class="calc-btn operator">%</button>
+              <button class="calc-btn backspace">
+                <i class="fa-solid fa-backspace"></i>
+              </button>
+
+              <button class="calc-btn num">7</button>
+              <button class="calc-btn num">8</button>
+              <button class="calc-btn num">9</button>
+              <button class="calc-btn operator">x</button>
+
+              <button class="calc-btn num">4</button>
+              <button class="calc-btn num">5</button>
+              <button class="calc-btn num">6</button>
+              <button class="calc-btn operator">-</button>
+
+              <button class="calc-btn num">1</button>
+              <button class="calc-btn num">2</button>
+              <button class="calc-btn num">3</button>
+              <button class="calc-btn operator">+</button>
+
+              <button class="calc-btn decimal">.</button>
+              <button class="calc-btn num">0</button>
+              <button class="calc-btn equals span-2">=</button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="bottom-bar">
+        <button class="btn-commander" id="btn-final-pay">Payer</button>
+        <div class="total-display">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="total-amount-pay">0,00 €</span>
+        </div>
+      </footer>
+    </div>
+
+    <div id="modal-pay-type" class="modal-overlay">
+      <div class="modal-content payment-options">
+        <div class="pay-option" id="pay-card">
+          <i class="fa-solid fa-credit-card"></i>
+          <span>Carte</span>
+        </div>
+        <div class="pay-divider"></div>
+        <div class="pay-option" id="pay-cash">
+          <i class="fa-solid fa-money-bill-wave"></i>
+          <span>Espèces</span>
         </div>
       </div>
     </div>

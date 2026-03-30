@@ -1,6 +1,6 @@
 const PASSWORDS = {
-  "1234": "../cashierMenu/cashierMenu.html",
-  "3214": "../adminMenu/adminPage.html",
+  1234: "../cashierMenu/cashierMenu.html",
+  3214: "../adminMenu/adminPage.html",
 };
 
 document.querySelector(".btn-check").addEventListener("click", function () {
@@ -16,6 +16,8 @@ document.querySelector(".btn-check").addEventListener("click", function () {
   }
 });
 
-document.querySelector("input[name='password']").addEventListener("keydown", function (e) {
-  if (e.key === "Enter") document.querySelector(".btn-check").click();
-});
+document
+  .querySelector("input[name='password']")
+  .addEventListener("keydown", function (e) {
+    if (e.key === "Enter") document.querySelector(".btn-check").click();
+  });
