@@ -1,0 +1,46 @@
+.table-container {
+	overflow-x: hidden;
+	margin-top: 10px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	background: white;
+	border-radius: 12px;
+	overflow: hidden;
+	font-size: 14px;
+}
+
+th, td {
+	padding: 10px;
+	text-align: left;
+	border-bottom: 1px solid #eee;
+}
+
+th {
+	background: #4060AD;
+	color: white;
+	font-weight: normal;
+}
+
+tr:hover {
+	background: #f9f9f9;
+}
+td:nth-child(2), /* type */
+td:nth-child(3), /* prix */
+td:nth-child(4) { /* stock */
+	white-space: nowrap;
+	font-size: 13px;
+}
+
+/* ACTION BUTTONS */
+.actions {
+	display: flex;
+	gap: 5px;
+}
+
+.actions .btn {
+	padding: 6px 8px;
+	font-size: 12px;
+}

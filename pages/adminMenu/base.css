@@ -57,11 +57,7 @@ body {
 	overflow-y: auto;
 }
 
-/* SECTION */
-.section {
-	margin-bottom: 80px;
-}
-
+/* TITRES */
 h1 {
 	font-size: 28px;
 	color: #4060AD;
@@ -72,13 +68,6 @@ h3 {
 	font-size: 20px;
 	margin-bottom: 10px;
 	color: #EB1553;
-}
-
-/* GRID */
-.grid-2 {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 20px;
 }
 
 /* CARD */
@@ -109,22 +98,11 @@ input, select {
 	font-size: 16px;
 }
 
-.primary {
-	background: #2ABECC;
-	color: white;
-}
+.primary { background: #2ABECC; color: white; }
+.secondary { background: #4060AD; color: white; }
+.danger { background: #EB1553; color: white; }
 
-.secondary {
-	background: #4060AD;
-	color: white;
-}
-
-.danger {
-	background: #EB1553;
-	color: white;
-}
-
-/* BUTTON GROUP */
+/* GROUP */
 .button-group {
 	display: flex;
 	gap: 15px;
@@ -133,26 +111,6 @@ input, select {
 
 .button-group .btn {
 	flex: 1;
-}
-
-/* TABLE */
-.table-container {
-	overflow-x: auto;
-}
-
-table {
-	width: 100%;
-	border-collapse: collapse;
-}
-
-th, td {
-	padding: 15px;
-	border-bottom: 1px solid #ddd;
-}
-
-th {
-	background: #4060AD;
-	color: white;
 }
 
 /* RESPONSIVE */
@@ -170,9 +128,5 @@ th {
 
 	.main-content {
 		margin-left: 0;
-	}
-
-	.grid-2 {
-		grid-template-columns: 1fr;
 	}
 }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>User</title>
+	<link rel="stylesheet" href="../base.css">
+	<link rel="stylesheet" href="user.css">
+</head>
+<body>
+<div class="container">
+
+	<!-- SIDEBAR -->
+	<aside class="sidebar">
+		<h2 class="logo">Admin</h2>
+		<ul>
+			<li><a href="../product/product.html">Produit</a></li>
+			<li><a href="../menu/menu.html">Menu</a></li>
+			<li><a href="../stock/stock.html">Stock</a></li>
+			<li><a href="../user/user.html">Utilisateur</a></li>
+			<li><a href="../recap/recap.html">Récapitulatif</a></li>
+		</ul>
+	</aside>
+
+	<!-- MAIN -->
+	<main class="main-content">
+
+		<section id="user-section" class="section">
+			<h1>Gestion des utilisateurs</h1>
+
+			<div class="grid-2">
+
+				<div class="card">
+					<h3>Ajouter</h3>
+
+					<input id="user-name" type="text" placeholder="Nom">
+					<input id="user-email" type="email" placeholder="Email">
+
+					<button class="btn primary">Ajouter</button>
+				</div>
+
+				<div class="card">
+					<h3>Supprimer</h3>
+
+					<select id="delete-user-select">
+						<option>Choisir utilisateur</option>
+					</select>
+
+					<button class="btn danger">Supprimer</button>
+				</div>
+
+			</div>
+		</section>
+	</main>
+
+</div>
+<script type="module" src="user.js"></script>
+</body>
+</html>
