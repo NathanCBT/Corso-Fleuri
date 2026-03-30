@@ -1,3 +1,10 @@
+// ============================================
+// ⚠️ BASE DE DONNÉES DÉSACTIVÉE
+// ============================================
+// Utiliser le fichier mockData.js à la place
+// ============================================
+
+/*
 const mysql = require('mysql2');
 require('dotenv').config();
 
@@ -14,3 +21,15 @@ const pool = mysql.createPool({
 const db = pool.promise();
 
 module.exports = db;
+*/
+
+// ============================================
+// DONNÉES MOCK - À REMPLACER PAR UNE VRAIE BD
+// ============================================
+
+module.exports = {
+  query: async () => {
+    // Stub pour compatibilité
+    return [[]];
+  }
+};
