@@ -13,27 +13,105 @@
     <img src="../../assets/logo.png" alt="logo">
   </div>
 
+  <button id="btn-deconnexion" class="btn btn-cyan btn-deconnexion-fixed">Déconnexion</button>
+
   <header class="header">
     <h1>Cuisine</h1>
   </header>
 
-  <main class="layout">
-
-    <div class="card">
-      <div class="order-num"></div>
-      <ul class="plats">
-        <li>Menu 1 <span class="qty">×2</span></li>
-        <li>Menu 2 <span class="qty">×1</span></li>
-        <li>Saucisse <span class="qty">×1</span></li>
-      </ul>
+  <div id="modal-logout" class="modal-overlay">
+      <div class="modal-content">
+        <i
+          class="fa-solid fa-circle-exclamation"
+          style="font-size: 3rem; color: var(--pink); margin-bottom: 15px"
+        ></i>
+        <h2>Se déconnecter ?</h2>
+        <p>Voulez-vous vraiment quitter la session en cours ?</p>
+        <div class="modal-buttons">
+          <button id="confirm-logout" class="btn btn-pink">Oui</button>
+          <button id="cancel-logout" class="btn btn-gray">Non</button>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-      <div class="order-num"></div>
-      <ul class="plats">
-        <li>Menu 2 <span class="qty">×1</span></li>
-        <li>Frites <span class="qty">×2</span></li>
-      </ul>
+  <main class="layout">
+
+    <div class="produits-col">
+      <div class="produits-grid">
+
+        <div class="produit-card">
+          <div class="produit-img"></div>
+          <div class="produit-info">
+            <span class="produit-nom">Frites</span>
+            <span class="produit-vendu">5</span>
+          </div>
+        </div>
+
+        <div class="produit-card">
+          <div class="produit-img"></div>
+          <div class="produit-info">
+            <span class="produit-nom">Menu 1</span>
+            <span class="produit-vendu">3</span>
+          </div>
+        </div>
+
+        <div class="produit-card">
+          <div class="produit-img"></div>
+          <div class="produit-info">
+            <span class="produit-nom">Menu 2</span>
+            <span class="produit-vendu">5</span>
+          </div>
+        </div>
+
+        <div class="produit-card">
+          <div class="produit-img"></div>
+          <div class="produit-info">
+            <span class="produit-nom">Saucisses</span>
+            <span class="produit-vendu">3</span>
+          </div>
+        </div>
+
+        <div class="produit-card">
+          <div class="produit-img"></div>
+          <div class="produit-info">
+            <span class="produit-nom">Nuggets</span>
+            <span class="produit-vendu">1</span>
+          </div>
+        </div>
+
+        <div class="produit-card">
+          <div class="produit-img"></div>
+          <div class="produit-info">
+            <span class="produit-nom">Sangria</span>
+            <span class="produit-vendu">2</span>
+          </div>
+        </div>
+
+        <div class="produit-card">
+          <div class="produit-img"></div>
+          <div class="produit-info">
+            <span class="produit-nom">Coca Cola</span>
+            <span class="produit-vendu">4</span>
+          </div>
+        </div>
+
+        <div class="produit-card">
+          <div class="produit-img"></div>
+          <div class="produit-info">
+            <span class="produit-nom">Café</span>
+            <span class="produit-vendu">1</span>
+          </div>
+        </div>
+
+        <div class="produit-card">
+          <div class="produit-img"></div>
+          <div class="produit-info">
+            <span class="produit-nom">Perrier</span>
+            <span class="produit-vendu">2</span>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <div class="ventes-col">
@@ -50,44 +128,26 @@
           <li class="histo-row rank-2">
             <div class="histo-row-top">
               <div class="histo-name"><span class="rank-badge">2</span> Frites</div>
+              <span class="histo-total">5</span>
+            </div>
+            <div class="histo-bar-wrap"><div class="histo-bar" style="width:100%"></div></div>
+          </li>
+          <li class="histo-row rank-3">
+            <div class="histo-row-top">
+              <div class="histo-name"><span class="rank-badge">3</span> Coca Cola</div>
               <span class="histo-total">4</span>
             </div>
             <div class="histo-bar-wrap"><div class="histo-bar" style="width:80%"></div></div>
           </li>
-          <li class="histo-row rank-3">
-            <div class="histo-row-top">
-              <div class="histo-name"><span class="rank-badge">3</span> Menu 1</div>
-              <span class="histo-total">1</span>
-            </div>
-            <div class="histo-bar-wrap"><div class="histo-bar" style="width:20%"></div></div>
-          </li>
         </ul>
         <div class="histo-footer">
           <span>Total vendus</span>
-          <span class="histo-grand-total">16</span>
+          <span class="histo-grand-total">26</span>
         </div>
       </div>
     </div>
 
-    <div class="card">
-      <div class="order-num"></div>
-      <ul class="plats">
-        <li>Saucisses <span class="qty">×2</span></li>
-        <li>Frites <span class="qty">×2</span></li>
-        <li>Nuggets <span class="qty">×1</span></li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <div class="order-num"></div>
-      <ul class="plats">
-        <li>Menu 1 <span class="qty">×1</span></li>
-        <li>Menu 2 <span class="qty">×3</span></li>
-      </ul>
-    </div>
-
   </main>
-
-  <script src="kitchen.js"></script>
+<script src="kitchen.js"></script>
 </body>
 </html>
