@@ -1,17 +1,24 @@
-import { users } from "../models/User.js";
+import { UserRepository } from "../repositories/UserRepository.js";
 
-export const login = (req, res) => {
+const userRepo = new UserRepository();
+
+export const login = async (req, res) => {
   const { password } = req.body;
 
-  const user = users.find((u) => u.password === password);
+  try {
+    const user = await userRepo.findByPassword(password);
 
-  if (user) {
-    res.json({
-      success: true,
-      role: user.role,
-      username: user.name,
-    });
-  } else {
-    res.status(401).json({ success: false, message: "Code incorrect" });
+    if (user) {
+      res.json({
+        success: true,
+        role: user.rule === 1 ? "admin" : "cashier",
+        username: user.name,
+      });
+    } else {
+      res.status(401).json({ success: false, message: "Code incorrect" });
+    }
+  } catch (error) {
+    console.error("Erreur SQL :", error);
+    res.status(500).json({ success: false, message: "Erreur serveur" });
   }
 };

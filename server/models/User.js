@@ -1,4 +1,12 @@
-export const users = [
-  { id: 1, name: "Admin Principal", password: "3214", role: "admin" },
-  { id: 2, name: "Caisse 01", password: "1234", role: "cashier" },
-];
+export class User {
+  constructor(id, name, password, rule) {
+    this.id = id;
+    this.name = name;
+    this.password = password;
+    this.rule = rule;
+  }
+
+  static fromRow(row) {
+    return new User(row.IdUnique, row.Name, row.Password, row.Rule);
+  }
+}
