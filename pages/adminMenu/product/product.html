@@ -37,7 +37,11 @@
 						<h3>Ajouter produit</h3>
 
 						<input id="product-name" type="text" placeholder="Nom produit">
-						<input id="product-price" type="number" placeholder="Prix">
+						<input id="product-buy-price" type="number" placeholder="Prix vente">
+						<input id="product-sell-price" type="number" placeholder="Prix achat">
+						<input id="product-quantity" type="number" placeholder="Quantité">
+						<input id="product-quantity-limit" type="number" placeholder="Quantité Alerte du produit">
+
 
 						<select id="product-type">
 							<option>Type produit</option>
@@ -46,7 +50,6 @@
 							<option value="soft">Soft</option>
 						</select>
 
-						<input id="product-quantity" type="number" placeholder="Quantité">
 						<input id="product-image" type="file" accept="image/*">
 
 						<button id="btn-add-product" class="btn primary">Ajouter</button>
@@ -68,17 +71,6 @@
 								</thead>
 
 								<tbody id="product-table-body">
-									<tr>
-										<td>Produit 1</td>
-										<td>Cold</td>
-										<td>5€</td>
-										<td>20</td>
-										<td class="actions">
-											<button class="btn secondary">Activer</button>
-											<button class="btn primary">Modifier</button>
-											<button class="btn danger">Supprimer</button>
-										</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>

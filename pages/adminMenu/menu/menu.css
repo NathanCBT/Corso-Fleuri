@@ -3,3 +3,17 @@
 	grid-template-columns: 1fr 1fr;
 	gap: 20px;
 }
+#btn-add-product-menu,
+#btn-update-menu {
+	margin-top: 10px;
+}
+#menu-products div button {
+    padding: 4px 8px;
+    font-size: 12px;
+    width: 60px;
+    height: 45px;
+}
+
+#menu-products div {
+    margin-bottom: 5px;
+}

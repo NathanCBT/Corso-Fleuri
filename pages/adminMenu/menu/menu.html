@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,67 +8,57 @@
 	<link rel="stylesheet" href="../base.css">
 	<link rel="stylesheet" href="menu.css">
 </head>
+
 <body>
-<div class="container">
+	<div class="container">
 
-	<!-- SIDEBAR -->
-	<aside class="sidebar">
-		<h2 class="logo">Admin</h2>
-		<ul>
-			<li><a href="../product/product.html">Produit</a></li>
-			<li><a href="../menu/menu.html">Menu</a></li>
-			<li><a href="../stock/stock.html">Stock</a></li>
-			<li><a href="../user/user.html">Utilisateur</a></li>
-			<li><a href="../recap/recap.html">Récapitulatif</a></li>
-		</ul>
-	</aside>
+		<!-- SIDEBAR -->
+		<aside class="sidebar">
+			<h2 class="logo">Admin</h2>
+			<ul>
+				<li><a href="../product/product.html">Produit</a></li>
+				<li><a href="../menu/menu.html">Menu</a></li>
+				<li><a href="../stock/stock.html">Stock</a></li>
+				<li><a href="../user/user.html">Utilisateur</a></li>
+				<li><a href="../recap/recap.html">Récapitulatif</a></li>
+			</ul>
+		</aside>
 
-	<main class="main-content">
+		<main class="main-content">
 
-		<section id="menu-section" class="section">
-			<h1>Gestion des Menus</h1>
+			<section id="menu-section" class="section">
+				<h1>Gestion des Menus</h1>
 
-			<div class="grid-2">
+				<div class="grid-2">
 
-				<div class="card">
-					<h3>Activer / Désactiver menu</h3>
+					<div class="card">
+						<h3>Créer un menu</h3>
 
-					<select id="toggle-menu-select">
-						<option>Choisir menu</option>
-					</select>
+						<input id="menu-name" type="text" placeholder="Nom du menu">
+						<input id="menu-price" type="number" placeholder="Prix du menu">
 
-					<button id="btn-toggle-menu" class="btn secondary">
-						Activer / Désactiver
-					</button>
+						<div id="menu-products"></div>
+
+						<button id="btn-add-product-menu" class="btn secondary">Ajouter produit</button>
+						<button id="btn-create-menu" class="btn primary">Créer</button>
+					</div>
+
+					<div class="card">
+						<h3>Modifier menu</h3>
+
+						<select id="edit-menu-select">
+							<option value="">Choisir menu</option>
+						</select>
+
+						<button id="btn-update-menu" class="btn primary">Modifier</button>
+					</div>
+
 				</div>
+			</section>
+		</main>
 
-				<div class="card">
-					<h3>Modifier menu</h3>
-
-					<select id="edit-menu-select">
-						<option>Choisir menu</option>
-					</select>
-
-					<select id="menu-product-1">
-						<option>Produit 1</option>
-					</select>
-
-					<select id="menu-product-2">
-						<option>Produit 2</option>
-					</select>
-
-					<select id="menu-product-3">
-						<option>Produit 3</option>
-					</select>
-
-					<button id="btn-update-menu" class="btn primary">Modifier</button>
-				</div>
-
-			</div>
-		</section>
-	</main>
-
-</div>
-<script type="module" src="menu.js"></script>
+	</div>
+	<script type="module" src="menu.js"></script>
 </body>
+
 </html>
