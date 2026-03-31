@@ -15,11 +15,26 @@
 
   <header class="header">
     <h1>Cuisine</h1>
+	<button id="btn-deconnexion" class="btn btn-cyan">Déconnexion</button>
   </header>
+
+  <div id="modal-logout" class="modal-overlay">
+      <div class="modal-content">
+        <i
+          class="fa-solid fa-circle-exclamation"
+          style="font-size: 3rem; color: var(--pink); margin-bottom: 15px"
+        ></i>
+        <h2>Se déconnecter ?</h2>
+        <p>Voulez-vous vraiment quitter la session en cours ?</p>
+        <div class="modal-buttons">
+          <button id="confirm-logout" class="btn btn-pink">Oui</button>
+          <button id="cancel-logout" class="btn btn-gray">Non</button>
+        </div>
+      </div>
+    </div>
 
   <main class="layout">
 
-    <!-- Grille produits à gauche -->
     <div class="produits-col">
       <div class="produits-grid">
 
@@ -98,7 +113,6 @@
       </div>
     </div>
 
-    <!-- Top meilleures ventes à droite -->
     <div class="ventes-col">
       <div class="historique-card">
         <div class="histo-title">Top des meilleures ventes</div>
@@ -175,6 +189,6 @@
     </div>
 
   </main>
-
+<script src="kitchen.js"></script>
 </body>
 </html>
