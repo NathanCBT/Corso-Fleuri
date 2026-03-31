@@ -1,1 +1,0 @@
-// Remplacé par articleRoutes.js

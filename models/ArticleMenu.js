@@ -1,23 +1,22 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const Commande = sequelize.define('Commande', {
-  IdOrder: {
+const ArticleMenu = sequelize.define('ArticleMenu', {
+  IdArticle: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    autoIncrement: true,
   },
-  Seller: {
+  IdMenu: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    primaryKey: true,
   },
-  Price: {
-    type: DataTypes.DOUBLE,
+  Quantity: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
 }, {
-  tableName: 'order',
+  tableName: 'articlemenu',
   timestamps: false,
 });
 
-module.exports = Commande;
+module.exports = ArticleMenu;

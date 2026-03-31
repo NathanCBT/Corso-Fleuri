@@ -12,23 +12,25 @@ const Article = sequelize.define('Article', {
     allowNull: false,
   },
   Name: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
   Price: {
     type: DataTypes.DOUBLE,
     allowNull: false,
+    defaultValue: 0,
   },
   Stock: {
     type: DataTypes.INTEGER,
-    defaultValue: 0,
+    allowNull: false,
   },
   QuantityMin: {
     type: DataTypes.INTEGER,
-    defaultValue: 5,
+    allowNull: false,
   },
-  hot: {
+  Hot: {
     type: DataTypes.TINYINT,
+    allowNull: false,
     defaultValue: 0,
   },
 }, {

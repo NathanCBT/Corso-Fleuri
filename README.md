@@ -1,36 +1,40 @@
 # Corso Fleuri - Backend Database
 
-Architecture MVC avec Sequelize connectée à HeidiSQL (Laragon)
+Architecture MVC avec Sequelize connectée à MySQL (corsofleuri)
 
 ## Structure des dossiers
 
 ```
 DB/
 ├── config/
-│   └── database.js          # Configuration Sequelize
+│   └── database.js               # Configuration Sequelize
 ├── models/
-│   ├── User.js              # Modèle utilisateur
-│   ├── Product.js           # Modèle produit
-│   ├── Commande.js          # Modèle commande
-│   ├── Menu.js              # Modèle menu
-│   └── index.js             # Export des modèles
+│   ├── User.js                   # Modèle utilisateur
+│   ├── Article.js                # Modèle article/produit
+│   ├── Category.js               # Modèle catégorie
+│   ├── Commande.js               # Modèle commande (order)
+│   ├── Menu.js                   # Modèle menu
+│   ├── ArticleMenu.js            # Relation article-menu
+│   ├── OrderArticle.js           # Relation commande-article
+│   ├── OrderMenu.js              # Relation commande-menu
+│   └── index.js                  # Export des modèles
 ├── controllers/
-│   ├── userController.js    # Logique métier utilisateur
-│   ├── productController.js # Logique métier produit
-│   ├── commandeController.js# Logique métier commande
-│   └── menuController.js    # Logique métier menu
+│   ├── userController.js         # Logique métier utilisateur
+│   ├── articleController.js      # Logique métier article
+│   ├── commandeController.js     # Logique métier commande
+│   └── menuController.js         # Logique métier menu
 ├── routes/
-│   ├── userRoutes.js        # Routes utilisateur
-│   ├── productRoutes.js     # Routes produit
-│   ├── commandeRoutes.js    # Routes commande
-│   ├── menuRoutes.js        # Routes menu
-│   └── index.js             # Routes principales
+│   ├── userRoutes.js             # Routes utilisateur
+│   ├── articleRoutes.js          # Routes article
+│   ├── commandeRoutes.js         # Routes commande
+│   ├── menuRoutes.js             # Routes menu
+│   └── index.js                  # Routes principales
 ├── middlewares/
-│   ├── authMiddleware.js    # Authentification
-│   └── errorMiddleware.js   # Gestion erreurs
-├── .env                     # Variables d'environnement
-├── server.js                # Point d'entrée
-└── package.json             # Dépendances
+│   ├── authMiddleware.js         # Authentification
+│   └── errorMiddleware.js        # Gestion erreurs
+├── .env                          # Variables d'environnement
+├── server.js                     # Point d'entrée
+└── package.json                  # Dépendances
 ```
 
 ## Installation
@@ -40,7 +44,14 @@ DB/
 npm install
 ```
 
-2. Configurer le fichier `.env` avec vos paramètres Laragon
+2. Configurer le fichier `.env` avec vos paramètres MySQL:
+```
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_NAME=corsofleuri
+DB_USER=root
+DB_PASSWORD=
+```
 
 3. Démarrer le serveur:
 ```bash
@@ -49,35 +60,35 @@ npm start
 
 ## API Endpoints
 
-### Users
-- `GET /api/users` - Récupérer tous les utilisateurs
-- `GET /api/users/:id` - Récupérer un utilisateur
-- `POST /api/users` - Créer un utilisateur
-- `PUT /api/users/:id` - Mettre à jour un utilisateur
-- `DELETE /api/users/:id` - Supprimer un utilisateur
+### User
+- `GET /api/user` - Récupérer tous les utilisateurs
+- `GET /api/user/:id` - Récupérer un utilisateur
+- `POST /api/user` - Créer un utilisateur
+- `PUT /api/user/:id` - Mettre à jour un utilisateur
+- `DELETE /api/user/:id` - Supprimer un utilisateur
 
-### Products
-- `GET /api/products` - Récupérer tous les produits
-- `GET /api/products/:id` - Récupérer un produit
-- `POST /api/products` - Créer un produit
-- `PUT /api/products/:id` - Mettre à jour un produit
-- `DELETE /api/products/:id` - Supprimer un produit
+### Article
+- `GET /api/article` - Récupérer tous les articles
+- `GET /api/article/:id` - Récupérer un article
+- `POST /api/article` - Créer un article
+- `PUT /api/article/:id` - Mettre à jour un article
+- `DELETE /api/article/:id` - Supprimer un article
 
-### Commandes
-- `GET /api/commandes` - Récupérer toutes les commandes
-- `GET /api/commandes/:id` - Récupérer une commande
-- `POST /api/commandes` - Créer une commande
-- `PUT /api/commandes/:id` - Mettre à jour une commande
-- `DELETE /api/commandes/:id` - Supprimer une commande
+### Order (Commandes)
+- `GET /api/order` - Récupérer toutes les commandes
+- `GET /api/order/:id` - Récupérer une commande
+- `POST /api/order` - Créer une commande
+- `PUT /api/order/:id` - Mettre à jour une commande
+- `DELETE /api/order/:id` - Supprimer une commande
 
-### Menus
-- `GET /api/menus` - Récupérer tous les menus
-- `GET /api/menus/:id` - Récupérer un menu
-- `POST /api/menus` - Créer un menu
-- `PUT /api/menus/:id` - Mettre à jour un menu
-- `DELETE /api/menus/:id` - Supprimer un menu
+### Menu
+- `GET /api/menu` - Récupérer tous les menus
+- `GET /api/menu/:id` - Récupérer un menu
+- `POST /api/menu` - Créer un menu
+- `PUT /api/menu/:id` - Mettre à jour un menu
+- `DELETE /api/menu/:id` - Supprimer un menu
 
-## Configuration Laragon
+## Configuration MySQL
 
 Base de données: `CorsoFleuri`
 User: `root`
