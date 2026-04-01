@@ -1,59 +1,62 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>User</title>
-	<link rel="stylesheet" href="../base.css">
-	<link rel="stylesheet" href="user.css">
-</head>
-<body>
-<div class="container">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User</title>
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="user.css" />
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <h2 class="logo">Admin</h2>
+        <ul>
+          <li><a href="../product/product.html">Produit</a></li>
+          <li><a href="../menu/menu.html">Menu</a></li>
+          <li><a href="../stock/stock.html">Stock</a></li>
+          <li><a href="../user/user.html">Utilisateur</a></li>
+          <li><a href="../recap/recap.html">Récapitulatif</a></li>
+        </ul>
+      </aside>
 
-	<!-- SIDEBAR -->
-	<aside class="sidebar">
-		<h2 class="logo">Admin</h2>
-		<ul>
-			<li><a href="../product/product.html">Produit</a></li>
-			<li><a href="../menu/menu.html">Menu</a></li>
-			<li><a href="../stock/stock.html">Stock</a></li>
-			<li><a href="../user/user.html">Utilisateur</a></li>
-			<li><a href="../recap/recap.html">Récapitulatif</a></li>
-		</ul>
-	</aside>
+      <main class="main-content">
+        <section id="user-section" class="section">
+          <h1>Gestion des utilisateurs</h1>
 
-	<!-- MAIN -->
-	<main class="main-content">
+          <div class="grid-2">
+            <div class="card">
+              <h3>Ajouter</h3>
 
-		<section id="user-section" class="section">
-			<h1>Gestion des utilisateurs</h1>
+              <input id="user-name" type="text" placeholder="Nom" />
+              <input
+                id="user-password"
+                type="password"
+                placeholder="Mot de passe"
+              />
 
-			<div class="grid-2">
+              <select id="select-role">
+                <option>Choisir le rôle</option>
+                <option value="admin">Administrateur</option>
+                <option value="cashier">Caissier</option>
+              </select>
 
-				<div class="card">
-					<h3>Ajouter</h3>
+              <button class="btn primary">Ajouter</button>
+            </div>
 
-					<input id="user-name" type="text" placeholder="Nom">
-					<input id="user-email" type="email" placeholder="Email">
+            <div class="card">
+              <h3>Supprimer</h3>
 
-					<button class="btn primary">Ajouter</button>
-				</div>
+              <select id="delete-user-select">
+                <option>Choisir utilisateur</option>
+              </select>
 
-				<div class="card">
-					<h3>Supprimer</h3>
-
-					<select id="delete-user-select">
-						<option>Choisir utilisateur</option>
-					</select>
-
-					<button class="btn danger">Supprimer</button>
-				</div>
-
-			</div>
-		</section>
-	</main>
-
-</div>
-<script type="module" src="user.js"></script>
-</body>
+              <button class="btn danger">Supprimer</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="user.js"></script>
+  </body>
 </html>

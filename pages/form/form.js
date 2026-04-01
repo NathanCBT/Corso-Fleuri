@@ -18,7 +18,7 @@ document
         localStorage.setItem("userName", data.username);
 
         if (data.role === "admin") {
-          window.location.href = "../adminMenu/adminMenu.html";
+          window.location.href = "../adminMenu/menu/menu.html";
         } else {
           window.location.href = "../cashierMenu/cashierMenu.html";
         }
