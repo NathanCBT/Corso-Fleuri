@@ -18,7 +18,6 @@
 			<ul>
 				<li><a href="../product/product.html">Produit</a></li>
 				<li><a href="../menu/menu.html">Menu</a></li>
-				<li><a href="../stock/stock.html">Stock</a></li>
 				<li><a href="../user/user.html">Utilisateur</a></li>
 				<li><a href="../recap/recap.html">Récapitulatif</a></li>
 			</ul>
@@ -37,7 +36,10 @@
 						<h3>Ajouter produit</h3>
 
 						<input id="product-name" type="text" placeholder="Nom produit">
-						<input id="product-price" type="number" placeholder="Prix">
+						<input id="product-buy-price" type="number" placeholder="Prix vente">
+						<input id="product-sell-price" type="number" placeholder="Prix achat">
+						<input id="product-quantity" type="number" placeholder="Quantité">
+						<input id="product-quantity-limit" type="number" placeholder="Quantité Alerte du produit">
 
 						<select id="product-type">
 							<option>Type produit</option>
@@ -46,10 +48,21 @@
 							<option value="soft">Soft</option>
 						</select>
 
-						<input id="product-quantity" type="number" placeholder="Quantité">
 						<input id="product-image" type="file" accept="image/*">
 
 						<button id="btn-add-product" class="btn primary">Ajouter</button>
+
+						<!-- GESTION STOCK -->
+						<hr style="margin: 15px 0; border-color: #eee;">
+						<h3>Ajouter stock</h3>
+
+						<select id="stock-product-select">
+							<option value="">Choisir un produit</option>
+						</select>
+
+						<input id="stock-quantity-add" type="number" placeholder="Quantité à ajouter">
+
+						<button id="btn-add-stock" class="btn secondary">Valider</button>
 					</div>
 
 					<div class="card">
@@ -68,17 +81,6 @@
 								</thead>
 
 								<tbody id="product-table-body">
-									<tr>
-										<td>Produit 1</td>
-										<td>Cold</td>
-										<td>5€</td>
-										<td>20</td>
-										<td class="actions">
-											<button class="btn secondary">Activer</button>
-											<button class="btn primary">Modifier</button>
-											<button class="btn danger">Supprimer</button>
-										</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
