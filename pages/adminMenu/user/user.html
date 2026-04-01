@@ -14,7 +14,6 @@
         <ul>
           <li><a href="../product/product.html">Produit</a></li>
           <li><a href="../menu/menu.html">Menu</a></li>
-          <li><a href="../stock/stock.html">Stock</a></li>
           <li><a href="../user/user.html">Utilisateur</a></li>
           <li><a href="../recap/recap.html">Récapitulatif</a></li>
         </ul>
@@ -35,24 +34,43 @@
                 placeholder="Mot de passe"
               />
 
-              <select id="select-role">
-                <option>Choisir le rôle</option>
-                <option value="admin">Administrateur</option>
-                <option value="cashier">Caissier</option>
+              <select id="user-role">
+                <option value="0">Caissier</option>
+                <option value="1">Admin</option>
               </select>
 
-              <button class="btn primary">Ajouter</button>
+              <button id="add-user-btn" class="btn primary">Ajouter</button>
             </div>
 
             <div class="card">
               <h3>Supprimer</h3>
 
               <select id="delete-user-select">
-                <option>Choisir utilisateur</option>
+                <option value="">Choisir utilisateur</option>
               </select>
 
-              <button class="btn danger">Supprimer</button>
+              <button id="delete-user-btn" class="btn danger">Supprimer</button>
             </div>
+          </div>
+
+          <div class="card" id="user-table-card">
+            <h3>Utilisateurs enregistrés</h3>
+            <table id="user-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nom</th>
+                  <th>Mot de passe</th>
+                </tr>
+              </thead>
+              <tbody id="user-table-body">
+                <tr id="empty-row">
+                  <td colspan="3" class="empty-msg">
+                    Aucun utilisateur enregistré.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
       </main>
