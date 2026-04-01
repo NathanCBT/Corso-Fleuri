@@ -1,97 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product</title>
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="product.css" />
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Product</title>
-	<link rel="stylesheet" href="../base.css">
-	<link rel="stylesheet" href="product.css">
-</head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <h2 class="logo">Admin</h2>
+        <ul>
+          <li><a href="../product/product.html">Produit</a></li>
+          <li><a href="../menu/menu.html">Menu</a></li>
+          <li><a href="../user/user.html">Utilisateur</a></li>
+          <li><a href="../recap/recap.html">Récapitulatif</a></li>
+        </ul>
+      </aside>
 
-<body>
-	<div class="container">
+      <main class="main-content">
+        <section id="produit-section" class="section">
+          <h1>Gestion des Produits</h1>
 
-		<!-- SIDEBAR -->
-		<aside class="sidebar">
-			<h2 class="logo">Admin</h2>
-			<ul>
-				<li><a href="../product/product.html">Produit</a></li>
-				<li><a href="../menu/menu.html">Menu</a></li>
-				<li><a href="../user/user.html">Utilisateur</a></li>
-				<li><a href="../recap/recap.html">Récapitulatif</a></li>
-			</ul>
-		</aside>
+          <div class="grid-2">
+            <div class="card">
+              <h3>Ajouter produit</h3>
 
-		<!-- MAIN -->
-		<main class="main-content">
+              <input id="product-name" type="text" placeholder="Nom produit" />
+              <input
+                id="product-buy-price"
+                type="number"
+                placeholder="Prix vente"
+              />
+              <input
+                id="product-sell-price"
+                type="number"
+                placeholder="Prix achat"
+              />
+              <input
+                id="product-quantity"
+                type="number"
+                placeholder="Quantité"
+              />
+              <input
+                id="product-quantity-limit"
+                type="number"
+                placeholder="Seuil d'alerte du produit"
+              />
 
-			<!-- PRODUIT -->
-			<section id="produit-section" class="section">
-				<h1>Gestion des Produits</h1>
+              <select id="product-type">
+                <option>Type produit</option>
+                <option value="cold">Froid</option>
+                <option value="hot">Chaud</option>
+                <option value="soft">Soft</option>
+              </select>
 
-				<div class="grid-2">
+              <input id="product-image" type="file" accept="image/*" />
 
-					<div class="card">
-						<h3>Ajouter produit</h3>
+              <button id="btn-add-product" class="btn primary">Ajouter</button>
 
-						<input id="product-name" type="text" placeholder="Nom produit">
-						<input id="product-buy-price" type="number" placeholder="Prix vente">
-						<input id="product-sell-price" type="number" placeholder="Prix achat">
-						<input id="product-quantity" type="number" placeholder="Quantité">
-						<input id="product-quantity-limit" type="number" placeholder="Quantité Alerte du produit">
+              <hr style="margin: 15px 0; border-color: #eee" />
+              <h3>Ajouter stock</h3>
 
-						<select id="product-type">
-							<option>Type produit</option>
-							<option value="cold">Cold</option>
-							<option value="hot">Hot</option>
-							<option value="soft">Soft</option>
-						</select>
+              <select id="stock-product-select">
+                <option value="">Choisir un produit</option>
+              </select>
 
-						<input id="product-image" type="file" accept="image/*">
+              <input
+                id="stock-quantity-add"
+                type="number"
+                placeholder="Quantité à ajouter"
+              />
 
-						<button id="btn-add-product" class="btn primary">Ajouter</button>
+              <button id="btn-add-stock" class="btn secondary">Valider</button>
+            </div>
 
-						<!-- GESTION STOCK -->
-						<hr style="margin: 15px 0; border-color: #eee;">
-						<h3>Ajouter stock</h3>
+            <div class="card">
+              <h3>Gérer produit</h3>
 
-						<select id="stock-product-select">
-							<option value="">Choisir un produit</option>
-						</select>
+              <div class="table-container">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Nom</th>
+                      <th>Type</th>
+                      <th>Prix</th>
+                      <th>Stock</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
 
-						<input id="stock-quantity-add" type="number" placeholder="Quantité à ajouter">
-
-						<button id="btn-add-stock" class="btn secondary">Valider</button>
-					</div>
-
-					<div class="card">
-						<h3>Gérer produit</h3>
-
-						<div class="table-container">
-							<table>
-								<thead>
-									<tr>
-										<th>Nom</th>
-										<th>Type</th>
-										<th>Prix</th>
-										<th>Stock</th>
-										<th>Actions</th>
-									</tr>
-								</thead>
-
-								<tbody id="product-table-body">
-								</tbody>
-							</table>
-						</div>
-					</div>
-
-				</div>
-			</section>
-		</main>
-
-	</div>
-	<script type="module" src="product.js"></script>
-</body>
-
+                  <tbody id="product-table-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="product.js"></script>
+  </body>
 </html>
