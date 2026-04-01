@@ -13,6 +13,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Route racine
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Bienvenue sur Corso-Fleuri API',
+    version: '1.0.0',
+    documentation: '/api'
+  });
+});
+
 // Routes
 app.use('/api', routes);
 
