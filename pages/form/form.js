@@ -1,6 +1,6 @@
 const PASSWORDS = {
   1234: "../cashierMenu/cashierMenu.html",
-  3214: "../adminMenu/adminPage.html",
+  3214: "../adminMenu/menu.html",
 };
 
 document.querySelector(".btn-check").addEventListener("click", function () {
