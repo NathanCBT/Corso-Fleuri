@@ -1,63 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu</title>
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="menu.css" />
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Menu</title>
-	<link rel="stylesheet" href="../base.css">
-	<link rel="stylesheet" href="menu.css">
-</head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <h2 class="logo">Admin</h2>
+        <ul>
+          <li><a href="../product/product.html">Produit</a></li>
+          <li><a href="../menu/menu.html">Menu</a></li>
+          <li><a href="../user/user.html">Utilisateur</a></li>
+          <li><a href="../recap/recap.html">Récapitulatif</a></li>
+        </ul>
+      </aside>
 
-<body>
-	<div class="container">
+      <main class="main-content">
+        <section id="menu-section" class="section">
+          <h1>Gestion des Menus</h1>
 
-		<!-- SIDEBAR -->
-		<aside class="sidebar">
-			<h2 class="logo">Admin</h2>
-			<ul>
-				<li><a href="../product/product.html">Produit</a></li>
-				<li><a href="../menu/menu.html">Menu</a></li>
-				<li><a href="../user/user.html">Utilisateur</a></li>
-				<li><a href="../recap/recap.html">Récapitulatif</a></li>
-			</ul>
-		</aside>
+          <div class="grid-2">
+            <div class="card">
+              <h3>Créer un menu</h3>
 
-		<main class="main-content">
+              <input id="menu-name" type="text" placeholder="Nom du menu" />
+              <input id="menu-price" type="number" placeholder="Prix du menu" />
 
-			<section id="menu-section" class="section">
-				<h1>Gestion des Menus</h1>
+              <div id="menu-products"></div>
 
-				<div class="grid-2">
+              <button id="btn-add-product-menu" class="btn secondary">
+                Ajouter produit
+              </button>
+              <button id="btn-create-menu" class="btn primary">Créer</button>
+            </div>
 
-					<div class="card">
-						<h3>Créer un menu</h3>
+            <div class="card">
+              <h3>Modifier menu</h3>
 
-						<input id="menu-name" type="text" placeholder="Nom du menu">
-						<input id="menu-price" type="number" placeholder="Prix du menu">
+              <select id="edit-menu-select">
+                <option value="">Choisir menu</option>
+              </select>
 
-						<div id="menu-products"></div>
-
-						<button id="btn-add-product-menu" class="btn secondary">Ajouter produit</button>
-						<button id="btn-create-menu" class="btn primary">Créer</button>
-					</div>
-
-					<div class="card">
-						<h3>Modifier menu</h3>
-
-						<select id="edit-menu-select">
-							<option value="">Choisir menu</option>
-						</select>
-
-						<button id="btn-update-menu" class="btn primary">Valider Modifications</button>
-					</div>
-
-				</div>
-			</section>
-		</main>
-
-	</div>
-	<script type="module" src="menu.js"></script>
-</body>
-
+              <button id="btn-update-menu" class="btn primary">
+                Valider Modifications
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="menu.js"></script>
+  </body>
 </html>
