@@ -1,15 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>User</title>
-	<link rel="stylesheet" href="../base.css">
-	<link rel="stylesheet" href="user.css">
-</head>
-<body>
-<div class="container">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User</title>
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="user.css" />
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <h2 class="logo">Admin</h2>
+        <ul>
+          <li><a href="../product/product.html">Produit</a></li>
+          <li><a href="../menu/menu.html">Menu</a></li>
+          <li><a href="../user/user.html">Utilisateur</a></li>
+          <li><a href="../recap/recap.html">Récapitulatif</a></li>
+        </ul>
+      </aside>
 
+<<<<<<< HEAD
 	<aside class="sidebar">
 		<h2 class="logo">Admin</h2>
 		<ul>
@@ -19,57 +29,59 @@
 			<li><a href="../recap/recap.html">Récapitulatif</a></li>
 		</ul>
 	</aside>
+=======
+      <main class="main-content">
+        <section id="user-section" class="section">
+          <h1>Gestion des utilisateurs</h1>
+>>>>>>> 625447998b44f7be1fae6c4ddf4badfc8dfa0a99
 
-	<main class="main-content">
+          <div class="grid-2">
+            <div class="card">
+              <h3>Ajouter</h3>
 
-		<section id="user-section" class="section">
-			<h1>Gestion des utilisateurs</h1>
+              <input id="user-name" type="text" placeholder="Nom" />
+              <input
+                id="user-password"
+                type="password"
+                placeholder="Mot de passe"
+              />
 
-			<div class="grid-2">
+              <button id="add-user-btn" class="btn primary">Ajouter</button>
+            </div>
 
-				<div class="card">
-					<h3>Ajouter</h3>
+            <div class="card">
+              <h3>Supprimer</h3>
 
-					<input id="user-name" type="text" placeholder="Nom">
-					<input id="user-password" type="password" placeholder="Mot de passe">
+              <select id="delete-user-select">
+                <option value="">Choisir utilisateur</option>
+              </select>
 
-					<button id="add-user-btn" class="btn primary">Ajouter</button>
-				</div>
+              <button id="delete-user-btn" class="btn danger">Supprimer</button>
+            </div>
+          </div>
 
-				<div class="card">
-					<h3>Supprimer</h3>
-
-					<select id="delete-user-select">
-						<option value="">Choisir utilisateur</option>
-					</select>
-
-					<button id="delete-user-btn" class="btn danger">Supprimer</button>
-				</div>
-
-			</div>
-
-			<div class="card" id="user-table-card">
-				<h3>Utilisateurs enregistrés</h3>
-				<table id="user-table">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Nom</th>
-							<th>Mot de passe</th>
-						</tr>
-					</thead>
-					<tbody id="user-table-body">
-						<tr id="empty-row">
-							<td colspan="3" class="empty-msg">Aucun utilisateur enregistré.</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-		</section>
-	</main>
-
-</div>
-<script type="module" src="user.js"></script>
-</body>
+          <div class="card" id="user-table-card">
+            <h3>Utilisateurs enregistrés</h3>
+            <table id="user-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nom</th>
+                  <th>Mot de passe</th>
+                </tr>
+              </thead>
+              <tbody id="user-table-body">
+                <tr id="empty-row">
+                  <td colspan="3" class="empty-msg">
+                    Aucun utilisateur enregistré.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="user.js"></script>
+  </body>
 </html>
