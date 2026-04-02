@@ -3,9 +3,8 @@ const menuPriceInput = document.getElementById("menu-price");
 const menuProductsContainer = document.getElementById("menu-products");
 const editMenuSelect = document.getElementById("edit-menu-select");
 
-let allProducts = []; // Pour stocker les produits de la BDD
+let allProducts = [];
 
-// Charger les données initiales
 async function init() {
   const resP = await fetch("http://localhost:3000/api/products");
   allProducts = await resP.json();
@@ -25,7 +24,6 @@ async function refreshMenus() {
   });
 }
 
-// Ajouter un champ Select pour choisir un produit dans le menu
 function addProductSelect() {
   const container = document.createElement("div");
   container.className = "product-select-row";
@@ -55,7 +53,6 @@ document
   .getElementById("btn-add-product-menu")
   .addEventListener("click", addProductSelect);
 
-// Créer le menu
 document
   .getElementById("btn-create-menu")
   .addEventListener("click", async () => {
@@ -79,7 +76,6 @@ document
     refreshMenus();
   });
 
-// Supprimer un menu
 document
   .getElementById("btn-update-menu")
   .addEventListener("click", async () => {

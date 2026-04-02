@@ -34,22 +34,23 @@ export class MenuRepository {
     const connection = await pool.getConnection();
     try {
       await connection.beginTransaction();
-      const idMenu = Math.floor(Math.random() * 10000);
 
-      await connection.query(
-        "INSERT INTO menu (IdMenu, Name, Price) VALUES (?, ?, ?)",
-        [idMenu, name, price],
+      const [result] = await connection.query(
+        "INSERT INTO menu (Name, Price) VALUES (?, ?)",
+        [name, price],
       );
+
+      const newMenuId = result.insertId;
 
       for (const artId of articles) {
         await connection.query(
           "INSERT INTO articlemenu (IdArticle, IdMenu, Quantity) VALUES (?, ?, ?)",
-          [artId, idMenu, 1],
+          [artId, newMenuId, 1],
         );
       }
 
       await connection.commit();
-      return idMenu;
+      return newMenuId;
     } catch (error) {
       await connection.rollback();
       throw error;

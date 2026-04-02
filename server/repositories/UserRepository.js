@@ -8,12 +8,11 @@ export class UserRepository {
   }
 
   async create(name, password, rule) {
-    const id = Math.floor(Math.random() * 10000);
-    await pool.query(
-      "INSERT INTO user (IdUnique, Name, Password, Rule) VALUES (?, ?, ?, ?)",
-      [id, name, password, rule],
+    const [result] = await pool.query(
+      "INSERT INTO user (Name, Password, Rule) VALUES (?, ?, ?)",
+      [name, password, rule],
     );
-    return id;
+    return result.insertId;
   }
 
   async delete(id) {

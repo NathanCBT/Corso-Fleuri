@@ -12,13 +12,12 @@ export class ProductRepository {
 
   async create(productData) {
     const { name, price, stock, quantityMin, idCategory, hot } = productData;
-    const id = Math.floor(Math.random() * 10000); // Id provisoire
-
-    await pool.query(
-      "INSERT INTO article (Id, IdCategory, Name, Price, Stock, QuantityMin, Hot) VALUES (?, ?, ?, ?, ?, ?, ?)",
-      [id, idCategory, name, price, stock, quantityMin, hot],
+    const [result] = await pool.query(
+      "INSERT INTO article (IdCategory, Name, Price, Stock, QuantityMin, Hot) VALUES (?, ?, ?, ?, ?, ?)",
+      [idCategory, name, price, stock, quantityMin, hot],
     );
-    return id;
+
+    return result.insertId;
   }
 
   async update(id, data) {
