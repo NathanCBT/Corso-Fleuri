@@ -6,6 +6,7 @@
     <title>User</title>
     <link rel="stylesheet" href="../base.css" />
     <link rel="stylesheet" href="user.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   </head>
   <body>
     <div class="container">
@@ -19,21 +20,26 @@
         </ul>
       </aside>
 
-<<<<<<< HEAD
-	<aside class="sidebar">
-		<h2 class="logo">Admin</h2>
-		<ul>
-			<li><a href="../product/product.html">Produit</a></li>
-			<li><a href="../menu/menu.html">Menu</a></li>
-			<li><a href="../user/user.html">Utilisateur</a></li>
-			<li><a href="../recap/recap.html">Récapitulatif</a></li>
-		</ul>
-	</aside>
-=======
       <main class="main-content">
+        <header class="top-nav">
+                <button id="btn-deconnexion" class="btn btn-cyan">Déconnexion</button>
+            </header>
+
+            <div id="modal-logout" class="modal-overlay">
+                <div class="modal-content">
+                    <i class="fa-solid fa-circle-exclamation"
+                        style="font-size: 3rem; color: var(--pink); margin-bottom: 15px"></i>
+                    <h2>Se déconnecter ?</h2>
+                    <p>Voulez-vous vraiment quitter la session en cours ?</p>
+                    <div class="modal-buttons">
+                        <button id="confirm-logout" class="btn btn-pink">Oui</button>
+                        <button id="cancel-logout" class="btn btn-gray">Non</button>
+                    </div>
+                </div>
+            </div>
+
         <section id="user-section" class="section">
           <h1>Gestion des utilisateurs</h1>
->>>>>>> 625447998b44f7be1fae6c4ddf4badfc8dfa0a99
 
           <div class="grid-2">
             <div class="card">
