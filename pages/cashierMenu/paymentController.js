@@ -1,5 +1,7 @@
 import { cart, calculateTotal, updateQuantity } from "./cart.js";
 
+const API_BASE = "http://localhost:3000/api";
+
 export function initPayment(updateCartUI) {
   const btnOrder = document.querySelector(".btn-commander");
   const paymentView = document.getElementById("payment-view");
@@ -161,6 +163,35 @@ export function handleFinalPayment() {
 }
 
 function confirmSale(method) {
-  alert(`Paiement ${method} accepté !`);
-  location.reload();
+  const articles = cart
+    .filter((item) => item.type === "article")
+    .map((item) => ({ id: item.id, quantity: item.quantity }));
+  const menus = cart
+    .filter((item) => item.type === "menu")
+    .map((item) => ({ id: item.id }));
+  const total = calculateTotal();
+
+  fetch(`${API_BASE}/orders`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      seller: 1,
+      price: total,
+      articles,
+      menus,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success) {
+        alert(`Paiement ${method} accepté ! Commande #${data.orderId}`);
+        location.reload();
+      } else {
+        alert("Erreur lors de la commande");
+      }
+    })
+    .catch((e) => {
+      console.error(e);
+      alert("Erreur de connexion au serveur");
+    });
 }

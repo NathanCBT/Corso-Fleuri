@@ -50,13 +50,15 @@
                 placeholder="Seuil d'alerte du produit"
               />
 
-              <select id="product-type">
+              <label for="product-type">Type produit</label>
+              <select id="product-type" title="Sélectionner le type de produit">
                 <option>Type produit</option>
                 <option value="cold">Froid</option>
                 <option value="hot">Chaud</option>
                 <option value="soft">Soft</option>
               </select>
 
+              <label for="product-image">Image produit</label>
               <input id="product-image" type="file" accept="image/*" />
 
               <button id="btn-add-product" class="btn primary">Ajouter</button>
@@ -64,7 +66,7 @@
               <hr style="margin: 15px 0; border-color: #eee" />
               <h3>Ajouter stock</h3>
 
-              <select id="stock-product-select">
+              <select id="stock-product-select" title="Sélectionner un produit">
                 <option value="">Choisir un produit</option>
               </select>
 
