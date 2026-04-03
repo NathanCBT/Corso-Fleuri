@@ -14,6 +14,26 @@ let stockQuantityAdd = document.getElementById("stock-quantity-add");
 let btnAddStock = document.getElementById("btn-add-stock");
 let editIndex = null;
 
+document.addEventListener("DOMContentLoaded", () => {
+  const modalLogout = document.getElementById("modal-logout");
+  const confirmBtn = document.getElementById("confirm-logout");
+  const cancelBtn = document.getElementById("cancel-logout");
+  const btnOpenLogout = document.getElementById("btn-deconnexion");
+
+  btnOpenLogout.onclick = () => {
+    modalLogout.style.display = "flex";
+  };
+
+  cancelBtn.onclick = () => {
+    modalLogout.style.display = "none";
+  };
+
+  confirmBtn.onclick = () => {
+    window.location.href = "../form/form.html";
+  };
+});
+
+
 btnAddProduct.addEventListener("click", () => {
   createOrUpdateProduct();
   refreshTable();
@@ -67,7 +87,7 @@ function resetForm() {
 }
 
 function refreshTable() {
-  productTableBody.innerHTML = "";
+  productTableBody.textContent = "";
 
   Product.productList.forEach((product, index) => {
     const newTr = document.createElement("tr");
@@ -134,7 +154,7 @@ function refreshTable() {
   refreshStockSelect();
 }
 function refreshStockSelect() {
-  stockProductSelect.innerHTML = '<option value="">Choisir un produit</option>';
+  stockProductSelect.textContent = '<option value="">Choisir un produit</option>';
   Product.productList.forEach((product, index) => {
     const option = document.createElement("option");
     option.value = index;

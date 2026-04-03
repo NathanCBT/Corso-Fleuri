@@ -22,7 +22,7 @@ if (Product.productList.length === 0) {
 let menus = [];
 
 function refreshMenuDropdown(){
-    editMenuSelect.innerHTML = '<option value="">Choisir menu</option>';
+    editMenuSelect.textContent = '<option value="">Choisir menu</option>';
     menus.forEach((menu,index)=>{
         let option = document.createElement("option");
         option.value = index;
@@ -34,13 +34,13 @@ function refreshMenuDropdown(){
 function clearMenuInputs(){
     menuNameInput.value = "";
     menuPriceInput.value = "";
-    menuProductsContainer.innerHTML = "";
+    menuProductsContainer.textContent = "";
 }
 
 function loadMenu(menu){
     menuNameInput.value = menu.name;
     menuPriceInput.value = menu.price;
-    menuProductsContainer.innerHTML = "";
+    menuProductsContainer.textContent = "";
     menu.productsList.forEach(product=>{
         addProductSelect(product);
     });
