@@ -2,13 +2,14 @@ import { OrderRepository } from "../repositories/OrderRepository.js";
 const orderRepo = new OrderRepository();
 
 export const createOrder = async (req, res) => {
-  const { seller, price, articles, menus } = req.body;
+  const { seller, price, articles, menus, paymentMethod } = req.body;
   try {
     const orderId = await orderRepo.create(
       seller,
       price,
       articles || [],
       menus || [],
+      paymentMethod,
     );
     res.json({ success: true, orderId });
   } catch (e) {

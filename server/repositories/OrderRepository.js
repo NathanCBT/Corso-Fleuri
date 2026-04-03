@@ -1,14 +1,14 @@
 import pool from "../config/db.js";
 
 export class OrderRepository {
-  async create(seller, price, articles, menus) {
+  async create(seller, price, articles, menus, paymentMethod) {
     const connection = await pool.getConnection();
     try {
       await connection.beginTransaction();
 
       const [result] = await connection.query(
-        "INSERT INTO `order` (Seller, Price) VALUES (?, ?)",
-        [seller, price],
+        "INSERT INTO `order` (Seller, Price, PaymentMethod) VALUES (?, ?, ?)",
+        [seller, price, paymentMethod || null],
       );
       const orderId = result.insertId;
 
@@ -54,13 +54,16 @@ export class OrderRepository {
 
     for (const order of orders) {
       const [articles] = await pool.query(
-        `SELECT oa.*, a.Name FROM orderarticle oa
+        `SELECT oa.IdArticle, oa.Quantity, a.Name, a.Price, c.Name as CategoryName
+         FROM orderarticle oa
          JOIN article a ON oa.IdArticle = a.Id
+         JOIN category c ON a.IdCategory = c.id
          WHERE oa.IdOrder = ?`,
         [order.IdOrder],
       );
       const [menus] = await pool.query(
-        `SELECT om.*, m.Name FROM ordermenu om
+        `SELECT om.IdMenu, m.Name, m.Price
+         FROM ordermenu om
          JOIN menu m ON om.IdMenu = m.IdMenu
          WHERE om.IdOrder = ?`,
         [order.IdOrder],

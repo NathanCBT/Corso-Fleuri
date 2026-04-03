@@ -171,14 +171,17 @@ function confirmSale(method) {
     .map((item) => ({ id: item.id }));
   const total = calculateTotal();
 
+  const seller = localStorage.getItem("userName") || "Inconnu";
+
   fetch(`${API_BASE}/orders`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      seller: 1,
+      seller,
       price: total,
       articles,
       menus,
+      paymentMethod: method,
     }),
   })
     .then((res) => res.json())
