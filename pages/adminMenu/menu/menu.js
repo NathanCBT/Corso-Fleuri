@@ -7,7 +7,24 @@ let editMenuSelect = document.getElementById("edit-menu-select");
 let btnAddProductMenu = document.getElementById("btn-add-product-menu");
 let btnUpdateMenu = document.getElementById("btn-update-menu");
 let menuProductsContainer = document.getElementById("menu-products");
+document.addEventListener("DOMContentLoaded", () => {
+  const modalLogout = document.getElementById("modal-logout");
+  const confirmBtn = document.getElementById("confirm-logout");
+  const cancelBtn = document.getElementById("cancel-logout");
+  const btnOpenLogout = document.getElementById("btn-deconnexion");
 
+  btnOpenLogout.onclick = () => {
+    modalLogout.style.display = "flex";
+  };
+
+  cancelBtn.onclick = () => {
+    modalLogout.style.display = "none";
+  };
+
+  confirmBtn.onclick = () => {
+    window.location.href = "../form/form.html";
+  };
+});
 // Initialise la liste statique si elle n'existe pas encore
 if (!Product.productList) {
     Product.productList = [];
