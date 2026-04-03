@@ -130,3 +130,12 @@ td:nth-child(4) { /* stock */
   background: #eee;
   color: #333;
 }
+#btn-deconnexion {
+	width: 250px;
+	height: 50px;
+}
+header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-end;
+}

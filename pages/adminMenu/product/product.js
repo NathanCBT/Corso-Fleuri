@@ -29,10 +29,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   confirmBtn.onclick = () => {
-    window.location.href = "../form/form.html";
+    window.location.href = "../../form/form.html";
   };
 });
-
 
 btnAddProduct.addEventListener("click", () => {
   createOrUpdateProduct();
@@ -154,7 +153,8 @@ function refreshTable() {
   refreshStockSelect();
 }
 function refreshStockSelect() {
-  stockProductSelect.textContent = '<option value="">Choisir un produit</option>';
+  stockProductSelect.textContent =
+    '<option value="">Choisir un produit</option>';
   Product.productList.forEach((product, index) => {
     const option = document.createElement("option");
     option.value = index;
