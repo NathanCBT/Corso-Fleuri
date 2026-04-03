@@ -14,16 +14,16 @@ const tableBody      = document.getElementById("user-table-body");
 
 
 function renderTable() {
-	tableBody.innerHTML = "";
+	tableBody.textContent = "";
 
 	if (users.length === 0) {
-		tableBody.innerHTML = `<tr id="empty-row"><td colspan="3" class="empty-msg">Aucun utilisateur enregistré.</td></tr>`;
+		tableBody.textContent = `<tr id="empty-row"><td colspan="3" class="empty-msg">Aucun utilisateur enregistré.</td></tr>`;
 		return;
 	}
 
 	users.forEach((user, index) => {
 		const tr = document.createElement("tr");
-		tr.innerHTML = `
+		tr.textContent = `
 			<td>${index + 1}</td>
 			<td>${escapeHtml(user.name)}</td>
 			<td>${"•".repeat(user.password.length)}</td>
@@ -33,7 +33,7 @@ function renderTable() {
 }
 
 function renderDropdown() {
-	deleteSelect.innerHTML = `<option value="">Choisir utilisateur</option>`;
+	deleteSelect.textContent = `<option value="">Choisir utilisateur</option>`;
 
 	users.forEach((user, index) => {
 		const option = document.createElement("option");

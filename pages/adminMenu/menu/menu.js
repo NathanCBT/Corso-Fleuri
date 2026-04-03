@@ -7,7 +7,24 @@ let editMenuSelect = document.getElementById("edit-menu-select");
 let btnAddProductMenu = document.getElementById("btn-add-product-menu");
 let btnUpdateMenu = document.getElementById("btn-update-menu");
 let menuProductsContainer = document.getElementById("menu-products");
+document.addEventListener("DOMContentLoaded", () => {
+  const modalLogout = document.getElementById("modal-logout");
+  const confirmBtn = document.getElementById("confirm-logout");
+  const cancelBtn = document.getElementById("cancel-logout");
+  const btnOpenLogout = document.getElementById("btn-deconnexion");
 
+  btnOpenLogout.onclick = () => {
+    modalLogout.style.display = "flex";
+  };
+
+  cancelBtn.onclick = () => {
+    modalLogout.style.display = "none";
+  };
+
+  confirmBtn.onclick = () => {
+    window.location.href = "../form/form.html";
+  };
+});
 // Initialise la liste statique si elle n'existe pas encore
 if (!Product.productList) {
     Product.productList = [];
@@ -22,7 +39,7 @@ if (Product.productList.length === 0) {
 let menus = [];
 
 function refreshMenuDropdown(){
-    editMenuSelect.innerHTML = '<option value="">Choisir menu</option>';
+    editMenuSelect.textContent = '<option value="">Choisir menu</option>';
     menus.forEach((menu,index)=>{
         let option = document.createElement("option");
         option.value = index;
@@ -34,13 +51,13 @@ function refreshMenuDropdown(){
 function clearMenuInputs(){
     menuNameInput.value = "";
     menuPriceInput.value = "";
-    menuProductsContainer.innerHTML = "";
+    menuProductsContainer.textContent = "";
 }
 
 function loadMenu(menu){
     menuNameInput.value = menu.name;
     menuPriceInput.value = menu.price;
-    menuProductsContainer.innerHTML = "";
+    menuProductsContainer.textContent = "";
     menu.productsList.forEach(product=>{
         addProductSelect(product);
     });

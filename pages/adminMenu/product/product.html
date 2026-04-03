@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Product</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 	<link rel="stylesheet" href="../base.css">
 	<link rel="stylesheet" href="product.css">
 </head>
@@ -23,9 +24,26 @@
 			</ul>
 		</aside>
 
+
 		<!-- MAIN -->
 		<main class="main-content">
 
+			<header class="top-nav">
+				<button id="btn-deconnexion" class="btn btn-cyan">Déconnexion</button>
+			</header>
+
+			<div id="modal-logout" class="modal-overlay">
+				<div class="modal-content">
+					<i class="fa-solid fa-circle-exclamation"
+						style="font-size: 3rem; color: var(--pink); margin-bottom: 15px"></i>
+					<h2>Se déconnecter ?</h2>
+					<p>Voulez-vous vraiment quitter la session en cours ?</p>
+					<div class="modal-buttons">
+						<button id="confirm-logout" class="btn btn-pink">Oui</button>
+						<button id="cancel-logout" class="btn btn-gray">Non</button>
+					</div>
+				</div>
+			</div>
 			<!-- PRODUIT -->
 			<section id="produit-section" class="section">
 				<h1>Gestion des Produits</h1>
