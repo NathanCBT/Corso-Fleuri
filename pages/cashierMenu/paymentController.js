@@ -165,13 +165,13 @@ export function handleFinalPayment() {
 function confirmSale(method) {
   const articles = cart
     .filter((item) => item.type === "article")
-    .map((item) => ({ id: item.id, quantity: item.quantity }));
+    .map((item) => ({ id: item.id, quantity: item.quantity /*, name: item.name */ }));
   const menus = cart
     .filter((item) => item.type === "menu")
-    .map((item) => ({ id: item.id }));
+    .map((item) => ({ id: item.id /*, name: item.name, quantity: item.quantity || 1 */ }));
   const total = calculateTotal();
 
-  const seller = localStorage.getItem("userName") || "Inconnu";
+  const seller = parseInt(localStorage.getItem("userId")) || 1;
 
   fetch(`${API_BASE}/orders`, {
     method: "POST",

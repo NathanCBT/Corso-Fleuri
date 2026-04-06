@@ -49,7 +49,9 @@ export class OrderRepository {
 
   async findAllWithDetails() {
     const [orders] = await pool.query(
-      "SELECT * FROM `order` ORDER BY IdOrder DESC",
+      `SELECT o.*, u.Name as SellerName FROM \`order\` o
+       LEFT JOIN user u ON o.Seller = u.IdUnique
+       ORDER BY o.IdOrder DESC`,
     );
 
     for (const order of orders) {

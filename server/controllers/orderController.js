@@ -1,4 +1,6 @@
 import { OrderRepository } from "../repositories/OrderRepository.js";
+// import { printOrderTicket } from "../services/printService.js";
+
 const orderRepo = new OrderRepository();
 
 export const createOrder = async (req, res) => {
@@ -11,6 +13,16 @@ export const createOrder = async (req, res) => {
       menus || [],
       paymentMethod,
     );
+
+    // // Impression du ticket — non bloquant : une erreur imprimante ne fait pas échouer la commande
+    // const printItems = [
+    //   ...(articles || []).map((a) => ({ name: a.name, quantity: a.quantity })),
+    //   ...(menus   || []).map((m) => ({ name: m.name, quantity: m.quantity || 1 })),
+    // ];
+    // printOrderTicket(printItems).catch((err) =>
+    //   console.error('[Impression] Erreur :', err.message),
+    // );
+
     res.json({ success: true, orderId });
   } catch (e) {
     res.status(500).json({ error: e.message });

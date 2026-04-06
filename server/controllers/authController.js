@@ -13,6 +13,7 @@ export const login = async (req, res) => {
         success: true,
         role: user.rule === 1 ? "admin" : "cashier",
         username: user.name,
+        userId: user.id,
       });
     } else {
       res.status(401).json({ success: false, message: "Code incorrect" });

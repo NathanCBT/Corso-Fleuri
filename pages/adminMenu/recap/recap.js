@@ -32,7 +32,7 @@ async function loadVentes() {
         tr.innerHTML = `
           <td>${i === 0 ? order.IdOrder : ""}</td>
           <td>${i === 0 ? (order.PaymentMethod || "-") : ""}</td>
-          <td>${i === 0 ? (order.Seller || "-") : ""}</td>
+          <td>${i === 0 ? (order.SellerName || "-") : ""}</td>
           <td>${ligne.libelle}</td>
           <td>${ligne.quantite}</td>
           <td>${ligne.prix} €</td>

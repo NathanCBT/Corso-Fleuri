@@ -16,6 +16,7 @@ document
       if (data.success) {
         localStorage.setItem("userRole", data.role);
         localStorage.setItem("userName", data.username);
+        localStorage.setItem("userId", data.userId);
 
         if (data.role === "admin") {
           window.location.href = "../adminMenu/menu/menu.html";
