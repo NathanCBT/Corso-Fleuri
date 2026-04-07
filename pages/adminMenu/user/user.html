@@ -22,21 +22,21 @@
 
       <main class="main-content">
         <header class="top-nav">
-                <button id="btn-deconnexion" class="btn btn-cyan">Déconnexion</button>
-            </header>
+          <button id="btn-deconnexion" class="btn btn-cyan">Déconnexion</button>
+        </header>
 
-            <div id="modal-logout" class="modal-overlay">
-                <div class="modal-content">
-                    <i class="fa-solid fa-circle-exclamation"
-                        style="font-size: 3rem; color: var(--pink); margin-bottom: 15px"></i>
-                    <h2>Se déconnecter ?</h2>
-                    <p>Voulez-vous vraiment quitter la session en cours ?</p>
-                    <div class="modal-buttons">
-                        <button id="confirm-logout" class="btn btn-pink">Oui</button>
-                        <button id="cancel-logout" class="btn btn-gray">Non</button>
-                    </div>
-                </div>
+        <div id="modal-logout" class="modal-overlay">
+          <div class="modal-content">
+            <i class="fa-solid fa-circle-exclamation"
+              style="font-size: 3rem; color: var(--pink); margin-bottom: 15px"></i>
+            <h2>Se déconnecter ?</h2>
+            <p>Voulez-vous vraiment quitter la session en cours ?</p>
+            <div class="modal-buttons">
+              <button id="confirm-logout" class="btn btn-pink">Oui</button>
+              <button id="cancel-logout" class="btn btn-gray">Non</button>
             </div>
+          </div>
+        </div>
 
         <section id="user-section" class="section">
           <h1>Gestion des utilisateurs</h1>
@@ -52,13 +52,18 @@
                 placeholder="Mot de passe"
               />
 
+              <select id="user-role" title="Sélectionner le rôle de l'utilisateur">
+                <option value="0">Caissier</option>
+                <option value="1">Admin</option>
+              </select>
+
               <button id="add-user-btn" class="btn primary">Ajouter</button>
             </div>
 
             <div class="card">
               <h3>Supprimer</h3>
 
-              <select id="delete-user-select">
+              <select id="delete-user-select" title="Sélectionner utilisateur à supprimer">
                 <option value="">Choisir utilisateur</option>
               </select>
 

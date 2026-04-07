@@ -40,6 +40,7 @@
 	color: var(--muted, #9ca3af);
 	font-style: italic;
 	padding: 20px 0;
+<<<<<<< HEAD
 }
 
 :root {
@@ -137,4 +138,6 @@ header {
     display: flex;
     align-items: flex-start;
     justify-content: flex-end;
+=======
+>>>>>>> 12d0676d10284011d8817db7f3059aeedbbdc1da
 }
