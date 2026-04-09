@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
       card.append(img, info);
       card.onclick = () =>
         addToCart(
-          { id: product.Id, name: product.Name, price: Number(product.Price), type: "article" },
+          { id: product.Id, name: product.Name, price: Number(product.Price), type: "article", category: product.CategoryName || "" },
           updateCartUI,
         );
       container.appendChild(card);
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
         card.onclick = () => {
           col.querySelectorAll(".option-item-card").forEach((c) => c.classList.remove("selected"));
           card.classList.add("selected");
-          currentSelection[catName] = product.Name;
+          currentSelection[catName] = { id: product.Id, name: product.Name, category: product.CategoryName || "" };
           const btn = document.getElementById("btn-validate-menu");
           const allSelected = displayCats.every((c) => currentSelection[c]);
           btn.disabled = !allSelected;
@@ -139,10 +139,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const parts = displayCats.map((c) => currentSelection[c]).filter(Boolean);
       const finalMenu = {
         id: Date.now(),
-        name: `${type} (${parts.join(", ")})`,
+        name: `${type} (${parts.map((p) => p.name).join(", ")})`,
         price: price,
         quantity: 1,
         type: "menu",
+        articles: parts,
       };
       addToCart(finalMenu, updateCartUI);
       renderMenuDashboard(type, price);

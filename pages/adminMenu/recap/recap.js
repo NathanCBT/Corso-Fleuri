@@ -1,27 +1,12 @@
-<<<<<<< HEAD
-import Product from "../../../classes/Product.js";
-import Menu from "../../../classes/Menu.js"
-document.addEventListener("DOMContentLoaded", () => {
-  const modalLogout = document.getElementById("modal-logout");
-  const confirmBtn = document.getElementById("confirm-logout");
-  const cancelBtn = document.getElementById("cancel-logout");
-  const btnOpenLogout = document.getElementById("btn-deconnexion");
-
-  btnOpenLogout.onclick = () => {
-    modalLogout.style.display = "flex";
-  };
-
-  cancelBtn.onclick = () => {
-    modalLogout.style.display = "none";
-  };
-
-  confirmBtn.onclick = () => {
-    window.location.href = "../form/form.html";
-  };
-});
-=======
 const API_BASE = "http://localhost:3000/api";
 const ventesBody = document.getElementById("recap-ventes-body");
+
+function escapeHtml(str) {
+  if (str === null || str === undefined) return "-";
+  const div = document.createElement("div");
+  div.textContent = String(str);
+  return div.innerHTML;
+}
 
 async function loadVentes() {
   try {
@@ -52,12 +37,12 @@ async function loadVentes() {
       lignes.forEach((ligne, i) => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td>${i === 0 ? order.IdOrder : ""}</td>
-          <td>${i === 0 ? (order.PaymentMethod || "-") : ""}</td>
-          <td>${i === 0 ? (order.SellerName || "-") : ""}</td>
-          <td>${ligne.libelle}</td>
-          <td>${ligne.quantite}</td>
-          <td>${ligne.prix} €</td>
+          <td>${i === 0 ? escapeHtml(order.IdOrder) : ""}</td>
+          <td>${i === 0 ? escapeHtml(order.PaymentMethod) : ""}</td>
+          <td>${i === 0 ? escapeHtml(order.SellerName) : ""}</td>
+          <td>${escapeHtml(ligne.libelle)}</td>
+          <td>${escapeHtml(ligne.quantite)}</td>
+          <td>${escapeHtml(ligne.prix)} €</td>
         `;
         ventesBody.appendChild(tr);
       });
@@ -69,4 +54,26 @@ async function loadVentes() {
 }
 
 loadVentes();
->>>>>>> 12d0676d10284011d8817db7f3059aeedbbdc1da
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modalLogout = document.getElementById("modal-logout");
+  const confirmBtn = document.getElementById("confirm-logout");
+  const cancelBtn = document.getElementById("cancel-logout");
+  const btnOpenLogout = document.getElementById("btn-deconnexion");
+
+  if (btnOpenLogout) {
+    btnOpenLogout.onclick = () => {
+      modalLogout.style.display = "flex";
+    };
+  }
+  if (cancelBtn) {
+    cancelBtn.onclick = () => {
+      modalLogout.style.display = "none";
+    };
+  }
+  if (confirmBtn) {
+    confirmBtn.onclick = () => {
+      window.location.href = "../form/form.html";
+    };
+  }
+});
