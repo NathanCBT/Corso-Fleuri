@@ -1,10 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="../base.css" />
     <link rel="stylesheet" href="product.css" />
   </head>
@@ -14,23 +13,24 @@
       <aside class="sidebar">
         <h2 class="logo">Admin</h2>
         <ul>
-          <li><a href="../product/product.html">Produits</a></li>
+          <li><a href="../product/product.html">Produit</a></li>
           <li><a href="../menu/menu.html">Menu</a></li>
-          <li><a href="../user/user.html">Utilisateurs</a></li>
+          <li><a href="../user/user.html">Utilisateur</a></li>
           <li><a href="../recap/recap.html">Récapitulatif</a></li>
         </ul>
       </aside>
 
       <main class="main-content">
-
         <header class="top-nav">
           <button id="btn-deconnexion" class="btn btn-cyan">Déconnexion</button>
         </header>
 
         <div id="modal-logout" class="modal-overlay">
           <div class="modal-content">
-            <i class="fa-solid fa-circle-exclamation"
-              style="font-size: 3rem; color: var(--pink); margin-bottom: 15px"></i>
+            <i
+              class="fa-solid fa-circle-exclamation"
+              style="font-size: 3rem; color: var(--pink); margin-bottom: 15px"
+            ></i>
             <h2>Se déconnecter ?</h2>
             <p>Voulez-vous vraiment quitter la session en cours ?</p>
             <div class="modal-buttons">
@@ -39,6 +39,17 @@
             </div>
           </div>
         </div>
+
+        <section id="produit-section" class="section">
+          <h1>Gestion des Produits</h1>
+
+          <div class="grid-2">
+            <div class="card">
+              <h3>Ajouter produit</h3>
+
+              <input id="product-name" type="text" placeholder="Nom produit" />
+              <input
+                id="product-buy-price"
                 type="number"
                 placeholder="Prix vente"
               />
@@ -58,15 +69,13 @@
                 placeholder="Seuil d'alerte du produit"
               />
 
-              <label for="product-type">Type produit</label>
-              <select id="product-type" title="Sélectionner le type de produit">
+              <select id="product-type">
                 <option>Type produit</option>
                 <option value="cold">Froid</option>
                 <option value="hot">Chaud</option>
                 <option value="soft">Soft</option>
               </select>
 
-              <label for="product-image">Image produit</label>
               <input id="product-image" type="file" accept="image/*" />
 
               <button id="btn-add-product" class="btn primary">Ajouter</button>
@@ -74,7 +83,7 @@
               <hr style="margin: 15px 0; border-color: #eee" />
               <h3>Ajouter stock</h3>
 
-              <select id="stock-product-select" title="Sélectionner un produit">
+              <select id="stock-product-select">
                 <option value="">Choisir un produit</option>
               </select>
 

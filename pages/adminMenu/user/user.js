@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   if (confirmBtn) {
     confirmBtn.onclick = () => {
-      window.location.href = "../form/form.html";
+      window.location.href = "../../form/form.html";
     };
   }
 });
