@@ -1,72 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recap</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="recap.css" />
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Recap</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-	<link rel="stylesheet" href="../base.css">
-	<link rel="stylesheet" href="recap.css">
-</head>
+  <body>
+    <div class="container">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <h2 class="logo">Admin</h2>
+        <ul>
+          <li><a href="../product/product.html">Produits</a></li>
+          <li><a href="../menu/menu.html">Menu</a></li>
+          <li><a href="../user/user.html">Utilisateurs</a></li>
+          <li><a href="../recap/recap.html">Récapitulatif</a></li>
+        </ul>
+      </aside>
 
-<body>
-	<div class="container">
+      <!-- MAIN -->
+      <main class="main-content">
+        <header class="top-nav">
+          <button id="btn-deconnexion" class="btn btn-cyan">Déconnexion</button>
+        </header>
 
-		<!-- SIDEBAR -->
-		<aside class="sidebar">
-			<h2 class="logo">Admin</h2>
-			<ul>
-				<li><a href="../product/product.html">Produit</a></li>
-				<li><a href="../menu/menu.html">Menu</a></li>
-				<li><a href="../user/user.html">Utilisateur</a></li>
-				<li><a href="../recap/recap.html">Récapitulatif</a></li>
-			</ul>
-		</aside>
+        <div id="modal-logout" class="modal-overlay">
+          <div class="modal-content">
+            <i
+              class="fa-solid fa-circle-exclamation"
+              style="font-size: 3rem; color: var(--pink); margin-bottom: 15px"
+            ></i>
+            <h2>Se déconnecter ?</h2>
+            <p>Voulez-vous vraiment quitter la session en cours ?</p>
+            <div class="modal-buttons">
+              <button id="confirm-logout" class="btn btn-pink">Oui</button>
+              <button id="cancel-logout" class="btn btn-gray">Non</button>
+            </div>
+          </div>
+        </div>
 
-		<!-- MAIN -->
-		<main class="main-content">
+        <section id="ventes-section" class="section">
+          <h1>Ventes</h1>
 
-			<header class="top-nav">
-				<button id="btn-deconnexion" class="btn btn-cyan">Déconnexion</button>
-			</header>
-
-			<div id="modal-logout" class="modal-overlay">
-				<div class="modal-content">
-					<i class="fa-solid fa-circle-exclamation"
-						style="font-size: 3rem; color: var(--pink); margin-bottom: 15px"></i>
-					<h2>Se déconnecter ?</h2>
-					<p>Voulez-vous vraiment quitter la session en cours ?</p>
-					<div class="modal-buttons">
-						<button id="confirm-logout" class="btn btn-pink">Oui</button>
-						<button id="cancel-logout" class="btn btn-gray">Non</button>
-					</div>
-				</div>
-			</div>
-
-			<section id="ventes-section" class="section">
-				<h1>Ventes</h1>
-
-				<div class="card table-container">
-					<table>
-						<thead>
-							<tr>
-								<th>N° de Vente</th>
-								<th>Mode de paiement</th>
-								<th>Utilisateur</th>
-								<th>Libellé</th>
-								<th>Quantité</th>
-								<th>Prix de vente</th>
-							</tr>
-						</thead>
-						<tbody id="recap-ventes-body"></tbody>
-					</table>
-				</div>
-			</section>
-		</main>
-
-	</div>
-	<script type="module" src="recap.js"></script>
-</body>
-
+          <div class="card table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>N° de Vente</th>
+                  <th>Mode de paiement</th>
+                  <th>Utilisateur</th>
+                  <th>Libellé</th>
+                  <th>Quantité</th>
+                  <th>Prix de vente</th>
+                </tr>
+              </thead>
+              <tbody id="recap-ventes-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="recap.js"></script>
+  </body>
 </html>

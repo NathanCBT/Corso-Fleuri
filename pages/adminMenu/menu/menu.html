@@ -1,82 +1,84 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="menu.css" />
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Menu</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-	<link rel="stylesheet" href="../base.css">
-	<link rel="stylesheet" href="menu.css">
-</head>
+  <body>
+    <div class="container">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <h2 class="logo">Admin</h2>
+        <ul>
+          <li><a href="../product/product.html">Produits</a></li>
+          <li><a href="../menu/menu.html">Menu</a></li>
+          <li><a href="../user/user.html">Utilisateurs</a></li>
+          <li><a href="../recap/recap.html">Récapitulatif</a></li>
+        </ul>
+      </aside>
 
-<body>
-	<div class="container">
+      <main class="main-content">
+        <header class="top-nav">
+          <button id="btn-deconnexion" class="btn btn-cyan">Déconnexion</button>
+        </header>
 
-		<!-- SIDEBAR -->
-		<aside class="sidebar">
-			<h2 class="logo">Admin</h2>
-			<ul>
-				<li><a href="../product/product.html">Produit</a></li>
-				<li><a href="../menu/menu.html">Menu</a></li>
-				<li><a href="../user/user.html">Utilisateur</a></li>
-				<li><a href="../recap/recap.html">Récapitulatif</a></li>
-			</ul>
-		</aside>
+        <div id="modal-logout" class="modal-overlay">
+          <div class="modal-content">
+            <i
+              class="fa-solid fa-circle-exclamation"
+              style="font-size: 3rem; color: var(--pink); margin-bottom: 15px"
+            ></i>
+            <h2>Se déconnecter ?</h2>
+            <p>Voulez-vous vraiment quitter la session en cours ?</p>
+            <div class="modal-buttons">
+              <button id="confirm-logout" class="btn btn-pink">Oui</button>
+              <button id="cancel-logout" class="btn btn-gray">Non</button>
+            </div>
+          </div>
+        </div>
+        <section id="menu-section" class="section">
+          <h1>Gestion des Menus</h1>
 
-		<main class="main-content">
+          <div class="grid-2">
+            <div class="card">
+              <h3>Créer un menu</h3>
 
-			<header class="top-nav">
-				<button id="btn-deconnexion" class="btn btn-cyan">Déconnexion</button>
-			</header>
+              <input id="menu-name" type="text" placeholder="Nom du menu" />
+              <input id="menu-price" type="number" placeholder="Prix du menu" />
 
-			<div id="modal-logout" class="modal-overlay">
-				<div class="modal-content">
-					<i class="fa-solid fa-circle-exclamation"
-						style="font-size: 3rem; color: var(--pink); margin-bottom: 15px"></i>
-					<h2>Se déconnecter ?</h2>
-					<p>Voulez-vous vraiment quitter la session en cours ?</p>
-					<div class="modal-buttons">
-						<button id="confirm-logout" class="btn btn-pink">Oui</button>
-						<button id="cancel-logout" class="btn btn-gray">Non</button>
-					</div>
-				</div>
-			</div>
-			<section id="menu-section" class="section">
-				<h1>Gestion des Menus</h1>
+              <div id="menu-products"></div>
 
-				<div class="grid-2">
+              <button id="btn-add-product-menu" class="btn secondary">
+                Ajouter produit
+              </button>
+              <button id="btn-create-menu" class="btn primary">Créer</button>
+            </div>
 
-					<div class="card">
-						<h3>Créer un menu</h3>
+            <div class="card">
+              <h3>Modifier menu</h3>
 
-						<input id="menu-name" type="text" placeholder="Nom du menu">
-						<input id="menu-price" type="number" placeholder="Prix du menu">
+              <select id="edit-menu-select">
+                <option value="">Choisir menu</option>
+              </select>
 
-						<div id="menu-products"></div>
-
-						<button id="btn-add-product-menu" class="btn secondary">Ajouter produit</button>
-						<button id="btn-create-menu" class="btn primary">Créer</button>
-					</div>
-
-					<div class="card">
-						<h3>Modifier menu</h3>
-
-						<select id="edit-menu-select">
-							<option value="">Choisir menu</option>
-						</select>
-
-						<button id="btn-update-menu" class="btn primary">Valider Modifications</button>
-					</div>
-
-				</div>
-			</section>
-		</main>
-
-	</div>
-	<script type="module" src="menu.js"></script>
-</body>
-
+              <button id="btn-update-menu" class="btn primary">
+                Valider Modifications
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="menu.js"></script>
+  </body>
 </html>
 <!doctype html>
 <html lang="en">
@@ -123,7 +125,10 @@
               <h3>Modifier menu</h3>
 
               <label for="edit-menu-select">Sélectionner un menu</label>
-              <select id="edit-menu-select" title="Sélectionner un menu à modifier">
+              <select
+                id="edit-menu-select"
+                title="Sélectionner un menu à modifier"
+              >
                 <option value="">Choisir menu</option>
               </select>
 
