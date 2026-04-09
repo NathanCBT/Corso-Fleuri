@@ -1,5 +1,24 @@
 import pool from "../config/db.js";
 import { User } from "../models/User.js";
+import { scryptSync, randomBytes, timingSafeEqual } from "node:crypto";
+
+function hashPassword(password) {
+  const salt = randomBytes(16).toString("hex");
+  const hash = scryptSync(password, salt, 32).toString("hex");
+  return `${salt}:${hash}`;
+}
+
+function verifyPassword(inputPassword, storedValue) {
+  // Nouveau format : "salt:hash"
+  if (storedValue.includes(":")) {
+    const [salt, hash] = storedValue.split(":");
+    const hashBuffer = Buffer.from(hash, "hex");
+    const derived = scryptSync(inputPassword, salt, 32);
+    return timingSafeEqual(hashBuffer, derived);
+  }
+  // Ancien format : mot de passe en clair (rétrocompatibilité)
+  return inputPassword === storedValue;
+}
 
 export class UserRepository {
   async findAll() {
@@ -8,9 +27,10 @@ export class UserRepository {
   }
 
   async create(name, password, rule) {
+    const hashed = hashPassword(password);
     const [result] = await pool.query(
       "INSERT INTO user (Name, Password, Rule) VALUES (?, ?, ?)",
-      [name, password, rule],
+      [name, hashed, rule],
     );
     return result.insertId;
   }
@@ -20,12 +40,13 @@ export class UserRepository {
   }
 
   async findByPassword(password) {
-    const [rows] = await pool.query("SELECT * FROM user WHERE Password = ?", [
-      password,
-    ]);
+    const [rows] = await pool.query("SELECT * FROM user");
 
-    if (rows.length === 0) return null;
-
-    return User.fromRow(rows[0]);
+    for (const row of rows) {
+      if (verifyPassword(password, row.Password)) {
+        return User.fromRow(row);
+      }
+    }
+    return null;
   }
 }

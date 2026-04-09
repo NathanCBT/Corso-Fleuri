@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import pool from "./config/db.js";
 import { login } from "./controllers/authController.js";
 import {
   getAllUsers,
@@ -47,6 +48,30 @@ app.get("/api/orders", getAllOrders);
 app.post("/api/orders", createOrder);
 
 const PORT = 3000;
+
+// Migration : s'assurer que IdOrder est AUTO_INCREMENT
+try {
+  // Vérifier si IdOrder est déjà AUTO_INCREMENT
+  const [cols] = await pool.query(
+    "SELECT EXTRA FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'order' AND COLUMN_NAME = 'IdOrder'"
+  );
+  const isAutoInc = cols[0]?.EXTRA?.toLowerCase().includes("auto_increment");
+  if (!isAutoInc) {
+    // Supprimer les FK pour pouvoir modifier la colonne
+    await pool.query("ALTER TABLE ordermenu DROP FOREIGN KEY FK_ordermenu_order").catch(() => {});
+    await pool.query("ALTER TABLE orderarticle DROP FOREIGN KEY FK_orderarticle_order").catch(() => {});
+    await pool.query("ALTER TABLE `order` MODIFY IdOrder INT NOT NULL AUTO_INCREMENT");
+    // Recréer les FK
+    await pool.query("ALTER TABLE ordermenu ADD CONSTRAINT FK_ordermenu_order FOREIGN KEY (IdOrder) REFERENCES `order`(IdOrder)").catch(() => {});
+    await pool.query("ALTER TABLE orderarticle ADD CONSTRAINT FK_orderarticle_order FOREIGN KEY (IdOrder) REFERENCES `order`(IdOrder)").catch(() => {});
+    console.log("[Migration] IdOrder AUTO_INCREMENT appliqué");
+  } else {
+    console.log("[Migration] IdOrder déjà AUTO_INCREMENT, rien à faire");
+  }
+} catch (e) {
+  console.log("[Migration] Erreur :", e.message);
+}
+
 app.listen(PORT, () =>
   console.log(`Serveur démarré sur http://localhost:${PORT}`),
 );
