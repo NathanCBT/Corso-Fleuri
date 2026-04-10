@@ -72,3 +72,40 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 });
+
+// export CSV
+document.getElementById("btn-export-csv").addEventListener("click", () => {
+  const table = document.querySelector("table");
+  const rows = Array.from(table.querySelectorAll("tr"));
+
+  const separator = ";";
+
+  const csvContent = rows
+    .map((row) => {
+      const columns = Array.from(row.querySelectorAll("th, td"));
+      return columns
+        .map((col) => {
+          let content = col.textContent.replace("€", "").trim();
+          return `"${content}"`;
+        })
+        .join(separator);
+    })
+    .join("\n");
+
+  const blob = new Blob(["\ufeff" + csvContent], {
+    type: "text/csv;charset=utf-8;",
+  });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.setAttribute("href", url);
+  link.setAttribute(
+    "download",
+    `recapitulatif_ventes_${new Date().toLocaleDateString()}.csv`,
+  );
+  link.style.visibility = "hidden";
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+});
