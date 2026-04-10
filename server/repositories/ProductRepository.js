@@ -36,7 +36,19 @@ export class ProductRepository {
   }
 
   async delete(id) {
-    await pool.query("DELETE FROM article WHERE Id = ?", [id]);
+    const connection = await pool.getConnection();
+    try {
+      await connection.beginTransaction();
+      await connection.query("DELETE FROM articlemenu WHERE IdArticle = ?", [id]);
+      await connection.query("DELETE FROM orderarticle WHERE IdArticle = ?", [id]);
+      await connection.query("DELETE FROM article WHERE Id = ?", [id]);
+      await connection.commit();
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
+    }
   }
 
   async addStock(id, quantity) {
@@ -44,5 +56,14 @@ export class ProductRepository {
       quantity,
       id,
     ]);
+  }
+
+  async toggleVisibility(id) {
+    await pool.query(
+      "UPDATE article SET IsVisible = IF(IsVisible = 1, 0, 1) WHERE Id = ?",
+      [id]
+    );
+    const [[row]] = await pool.query("SELECT IsVisible FROM article WHERE Id = ?", [id]);
+    return row.IsVisible;
   }
 }

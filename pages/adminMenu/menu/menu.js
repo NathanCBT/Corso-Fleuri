@@ -30,6 +30,60 @@ async function refreshMenus() {
     opt.textContent = `${m.name} (${m.price}€)`;
     editMenuSelect.appendChild(opt);
   });
+
+  renderMenuVisibilityTable();
+}
+
+function renderMenuVisibilityTable() {
+  const tbody = document.getElementById("menu-visibility-table-body");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+
+  allMenus.forEach((m) => {
+    const tr = document.createElement("tr");
+    tr.style.opacity = m.isVisible ? "1" : "0.45";
+
+    // Bouton oeil
+    const tdEye = document.createElement("td");
+    tdEye.style.width = "36px";
+    const eyeBtn = document.createElement("button");
+    eyeBtn.className = "btn-eye";
+    eyeBtn.title = m.isVisible ? "Masquer du menu caisse" : "Afficher dans le menu caisse";
+    const eyeIcon = document.createElement("i");
+    eyeIcon.className = m.isVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
+    eyeBtn.appendChild(eyeIcon);
+    eyeBtn.addEventListener("click", async () => {
+      const res = await fetch(`http://localhost:3000/api/menus/${m.id}/toggle-visibility`, {
+        method: "PATCH",
+      });
+      const data = await res.json();
+      if (data.success) {
+        m.isVisible = data.isVisible;
+        eyeIcon.className = data.isVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
+        eyeBtn.title = data.isVisible ? "Masquer du menu caisse" : "Afficher dans le menu caisse";
+        tr.style.opacity = data.isVisible ? "1" : "0.45";
+        tdStatut.textContent = data.isVisible ? "Visible" : "Masqué";
+        tdStatut.style.color = data.isVisible ? "green" : "#aaa";
+      }
+    });
+    tdEye.appendChild(eyeBtn);
+
+    const tdName = document.createElement("td");
+    tdName.textContent = m.name;
+
+    const tdPrice = document.createElement("td");
+    tdPrice.textContent = `${m.price}€`;
+
+    const tdStatut = document.createElement("td");
+    tdStatut.textContent = m.isVisible ? "Visible" : "Masqué";
+    tdStatut.style.color = m.isVisible ? "green" : "#aaa";
+
+    tr.appendChild(tdEye);
+    tr.appendChild(tdName);
+    tr.appendChild(tdPrice);
+    tr.appendChild(tdStatut);
+    tbody.appendChild(tr);
+  });
 }
 
 function addProductSelect(selectedId = null, qty = 1) {
@@ -177,3 +231,26 @@ document.getElementById("btn-add-product-menu").onclick = () =>
   addProductSelect();
 
 init();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modalLogout = document.getElementById("modal-logout");
+  const confirmBtn = document.getElementById("confirm-logout");
+  const cancelBtn = document.getElementById("cancel-logout");
+  const btnOpenLogout = document.getElementById("btn-deconnexion");
+
+  if (btnOpenLogout) {
+    btnOpenLogout.onclick = () => {
+      modalLogout.style.display = "flex";
+    };
+  }
+  if (cancelBtn) {
+    cancelBtn.onclick = () => {
+      modalLogout.style.display = "none";
+    };
+  }
+  if (confirmBtn) {
+    confirmBtn.onclick = () => {
+      window.location.href = "../../form/form.html";
+    };
+  }
+});

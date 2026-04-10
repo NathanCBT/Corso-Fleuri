@@ -13,12 +13,14 @@ import {
   updateProduct,
   deleteProduct,
   addStock,
+  toggleProductVisibility,
 } from "./controllers/productController.js";
 import {
   getAllMenus,
   createMenu,
   deleteMenu,
   updateMenu,
+  toggleMenuVisibility,
 } from "./controllers/menuController.js";
 import { createOrder, getAllOrders } from "./controllers/orderController.js";
 
@@ -37,11 +39,13 @@ app.post("/api/products", createProduct);
 app.put("/api/products/:id", updateProduct);
 app.delete("/api/products/:id", deleteProduct);
 app.post("/api/products/add-stock", addStock);
+app.patch("/api/products/:id/toggle-visibility", toggleProductVisibility);
 
 app.get("/api/menus", getAllMenus);
 app.post("/api/menus", createMenu);
 app.delete("/api/menus/:id", deleteMenu);
 app.put("/api/menus/:id", updateMenu);
+app.patch("/api/menus/:id/toggle-visibility", toggleMenuVisibility);
 
 app.get("/api/orders", getAllOrders);
 app.post("/api/orders", createOrder);
@@ -83,6 +87,36 @@ try {
   }
 } catch (e) {
   console.log("[Migration] Erreur :", e.message);
+}
+
+// Migration : ajouter IsVisible à la table article
+try {
+  const [visCols] = await pool.query(
+    "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'article' AND COLUMN_NAME = 'IsVisible'"
+  );
+  if (visCols.length === 0) {
+    await pool.query("ALTER TABLE article ADD COLUMN IsVisible TINYINT(1) NOT NULL DEFAULT 1");
+    console.log("[Migration] IsVisible ajouté à article");
+  } else {
+    console.log("[Migration] IsVisible déjà présent dans article");
+  }
+} catch (e) {
+  console.log("[Migration] Erreur IsVisible :", e.message);
+}
+
+// Migration : ajouter IsVisible à la table menu
+try {
+  const [visMenuCols] = await pool.query(
+    "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'menu' AND COLUMN_NAME = 'IsVisible'"
+  );
+  if (visMenuCols.length === 0) {
+    await pool.query("ALTER TABLE menu ADD COLUMN IsVisible TINYINT(1) NOT NULL DEFAULT 1");
+    console.log("[Migration] IsVisible ajouté à menu");
+  } else {
+    console.log("[Migration] IsVisible déjà présent dans menu");
+  }
+} catch (e) {
+  console.log("[Migration] Erreur IsVisible menu :", e.message);
 }
 
 app.listen(PORT, () =>

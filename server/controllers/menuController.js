@@ -39,3 +39,12 @@ export const updateMenu = async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 };
+
+export const toggleMenuVisibility = async (req, res) => {
+  try {
+    const isVisible = await menuRepo.toggleVisibility(req.params.id);
+    res.json({ success: true, isVisible });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+};

@@ -45,3 +45,12 @@ export const addStock = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const toggleProductVisibility = async (req, res) => {
+  try {
+    const isVisible = await productRepo.toggleVisibility(req.params.id);
+    res.json({ success: true, isVisible });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

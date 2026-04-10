@@ -9,6 +9,29 @@ async function refresh() {
   productTableBody.innerHTML = "";
   products.forEach((p) => {
     const tr = document.createElement("tr");
+    tr.style.opacity = p.IsVisible ? "1" : "0.45";
+
+    // Bouton oeil
+    const tdVisibility = document.createElement("td");
+    tdVisibility.style.width = "36px";
+    const eyeBtn = document.createElement("button");
+    eyeBtn.className = "btn-eye";
+    eyeBtn.title = p.IsVisible ? "Masquer du menu" : "Afficher dans le menu";
+    const eyeIcon = document.createElement("i");
+    eyeIcon.className = p.IsVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
+    eyeBtn.appendChild(eyeIcon);
+    eyeBtn.addEventListener("click", async () => {
+      const res = await fetch(`http://localhost:3000/api/products/${p.Id}/toggle-visibility`, {
+        method: "PATCH",
+      });
+      const data = await res.json();
+      if (data.success) {
+        eyeIcon.className = data.isVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
+        eyeBtn.title = data.isVisible ? "Masquer du menu" : "Afficher dans le menu";
+        tr.style.opacity = data.isVisible ? "1" : "0.45";
+      }
+    });
+    tdVisibility.appendChild(eyeBtn);
 
     const tdName = document.createElement("td");
     tdName.textContent = p.Name;
@@ -42,6 +65,7 @@ async function refresh() {
     tdActions.appendChild(editBtn);
     tdActions.appendChild(delBtn);
 
+    tr.appendChild(tdVisibility);
     tr.appendChild(tdName);
     tr.appendChild(tdCat);
     tr.appendChild(tdPrice);

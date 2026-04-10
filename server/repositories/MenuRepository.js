@@ -17,6 +17,7 @@ export class MenuRepository {
           id: row.IdMenu,
           name: row.Name,
           price: row.Price,
+          isVisible: row.IsVisible,
           articles: [],
         };
       }
@@ -99,5 +100,14 @@ export class MenuRepository {
     } finally {
       connection.release();
     }
+  }
+
+  async toggleVisibility(id) {
+    await pool.query(
+      "UPDATE menu SET IsVisible = IF(IsVisible = 1, 0, 1) WHERE IdMenu = ?",
+      [id]
+    );
+    const [[row]] = await pool.query("SELECT IsVisible FROM menu WHERE IdMenu = ?", [id]);
+    return row.IsVisible;
   }
 }

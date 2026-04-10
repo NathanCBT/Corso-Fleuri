@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch(`${API_BASE}/menus`),
         fetch(`${API_BASE}/products`),
       ]);
-      allMenus = await menusRes.json();
-      allProducts = await productsRes.json();
+      allMenus = (await menusRes.json()).filter(m => !!m.isVisible);
+      allProducts = (await productsRes.json()).filter(p => !!p.IsVisible);
 
       generateMenuButtons();
 
@@ -73,6 +73,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const catNames = Object.keys(categories);
+    const CAT_SORT = ['entr', 'dessert', 'boisson', 'plat'];
+    catNames.sort((a, b) => {
+      const ra = CAT_SORT.findIndex(k => a.toLowerCase().includes(k));
+      const rb = CAT_SORT.findIndex(k => b.toLowerCase().includes(k));
+      return (ra === -1 ? 99 : ra) - (rb === -1 ? 99 : rb);
+    });
     const currentSelection = {};
     catNames.forEach((c) => (currentSelection[c] = null));
 
@@ -112,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
               .querySelectorAll(".option-item-card")
               .forEach((c) => c.classList.remove("selected"));
             card.classList.add("selected");
-            currentSelection[catName] = { id: product.Id, name: product.Name };
+            currentSelection[catName] = { id: product.Id, name: product.Name, category: product.CategoryName || "" };
 
             const btnVal = document.getElementById("btn-validate-menu");
             btnVal.disabled = !catNames.every((c) => currentSelection[c]);
