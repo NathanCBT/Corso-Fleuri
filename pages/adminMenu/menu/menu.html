@@ -14,7 +14,6 @@
 
   <body>
     <div class="container">
-      <!-- SIDEBAR -->
       <aside class="sidebar">
         <h2 class="logo">Admin</h2>
         <ul>
@@ -63,15 +62,29 @@
             </div>
 
             <div class="card">
-              <h3>Modifier menu</h3>
+              <h3>Modifier / Supprimer menu</h3>
 
+              <label for="edit-menu-select">Sélectionner un menu</label>
               <select id="edit-menu-select">
                 <option value="">Choisir menu</option>
               </select>
 
-              <button id="btn-update-menu" class="btn primary">
-                Valider Modifications
-              </button>
+              <div style="display: flex; gap: 10px; margin-top: 15px">
+                <button
+                  id="btn-update-menu"
+                  class="btn primary"
+                  style="flex: 1"
+                >
+                  Valider Modifications
+                </button>
+                <button
+                  id="btn-delete-menu"
+                  class="btn btn-pink"
+                  style="flex: 1"
+                >
+                  Supprimer
+                </button>
+              </div>
             </div>
           </div>
         </section>

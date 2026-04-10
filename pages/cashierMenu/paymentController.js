@@ -167,7 +167,12 @@ function confirmSale(method) {
   const articles = [
     ...cart
       .filter((item) => item.type === "article")
-      .map((item) => ({ id: item.id, quantity: item.quantity, name: item.name, category: item.category || "" })),
+      .map((item) => ({
+        id: item.id,
+        quantity: item.quantity,
+        name: item.name,
+        category: item.category || "",
+      })),
   ];
 
   // Menus composites : chaque entrée du panier = une instance numérotée
@@ -175,19 +180,30 @@ function confirmSale(method) {
   cart
     .filter((item) => item.type === "menu" && item.articles)
     .forEach((item) => {
-      const menuType = item.name.split(' (')[0];
-      if (instanceCounters[menuType] === undefined) instanceCounters[menuType] = 0;
+      const menuType = item.name.split(" (")[0];
+      if (instanceCounters[menuType] === undefined)
+        instanceCounters[menuType] = 0;
       else instanceCounters[menuType]++;
       const inst = instanceCounters[menuType];
       item.articles.forEach((a) => {
-        articles.push({ id: a.id, quantity: 1, name: a.name, category: a.category || "", menuGroup: menuType, menuInstance: inst });
+        articles.push({
+          id: a.id,
+          quantity: 1,
+          name: a.name,
+          category: a.category || "",
+          menuGroup: menuType,
+          menuInstance: inst,
+        });
       });
     });
 
-  // Seuls les vrais menus BDD (sans .articles) vont dans menus
   const menus = cart
-    .filter((item) => item.type === "menu" && !item.articles)
-    .map((item) => ({ id: item.id, name: item.name, quantity: item.quantity || 1 }));
+    .filter((item) => item.type === "menu")
+    .map((item) => ({
+      id: item.id,
+      name: item.name,
+      quantity: item.quantity || 1,
+    }));
   const total = calculateTotal();
 
   const seller = parseInt(localStorage.getItem("userId")) || 1;

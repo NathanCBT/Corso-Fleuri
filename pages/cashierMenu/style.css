@@ -459,6 +459,25 @@ body {
   overflow-y: auto;
 }
 
+/* désactivé pour les articles sans stock */
+.option-item-card.out-of-stock,
+.product-card.out-of-stock {
+  opacity: 0.5;
+  background-color: #e0e0e0 !important;
+  border: 1px dashed #999 !important;
+  cursor: not-allowed !important;
+  pointer-events: none;
+  position: relative;
+}
+
+.option-item-card.out-of-stock::after {
+  content: "ÉPUISÉ";
+  font-size: 0.7rem;
+  color: var(--pink);
+  display: block;
+  font-weight: bold;
+}
+
 @media (max-width: 900px) {
   .sidebar {
     width: 240px;
