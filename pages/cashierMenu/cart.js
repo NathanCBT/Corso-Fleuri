@@ -1,7 +1,9 @@
 export let cart = [];
 
 export function addToCart(product, callbackUpdate) {
-  const existingItem = cart.find((item) => item.id === product.id);
+  const existingItem = cart.find(
+    (item) => item.id === product.id && item.type === product.type,
+  );
 
   if (existingItem) {
     existingItem.quantity++;

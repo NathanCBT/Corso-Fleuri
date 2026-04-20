@@ -1,11 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Payment</title>
+	<style>
+		body { font-family: 'Segoe UI', sans-serif; background: #f8f9fa; padding: 40px; }
+		h1 { text-align: center; margin-bottom: 20px; }
+		.order-list { max-width: 600px; margin: 0 auto; }
+		.order-card { background: white; border-radius: 12px; padding: 15px 20px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+		.order-card h3 { margin: 0 0 8px; color: #4a69bd; }
+		.order-card p { margin: 4px 0; }
+		.order-card ul { padding-left: 20px; margin: 6px 0; }
+	</style>
 </head>
 <body>
+	<h1>Historique des paiements</h1>
+	<div class="order-list" id="order-list">
+		<p style="text-align:center;">Chargement...</p>
+	</div>
 	<script src="payment.js"></script>
 </body>
 </html>

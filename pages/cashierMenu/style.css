@@ -140,7 +140,7 @@ body {
 
 .dashboard-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 15px;
   flex: 1;
   overflow-y: auto;
@@ -457,6 +457,25 @@ body {
 #sidebar-payment .cart-items {
   max-height: 100%;
   overflow-y: auto;
+}
+
+/* désactivé pour les articles sans stock */
+.option-item-card.out-of-stock,
+.product-card.out-of-stock {
+  opacity: 0.5;
+  background-color: #e0e0e0 !important;
+  border: 1px dashed #999 !important;
+  cursor: not-allowed !important;
+  pointer-events: none;
+  position: relative;
+}
+
+.option-item-card.out-of-stock::after {
+  content: "ÉPUISÉ";
+  font-size: 0.7rem;
+  color: var(--pink);
+  display: block;
+  font-weight: bold;
 }
 
 @media (max-width: 900px) {

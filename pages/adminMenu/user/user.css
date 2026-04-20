@@ -79,7 +79,7 @@
 }
 
 .modal-overlay {
-  display: none; /* affichée via JS */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -125,14 +125,12 @@
     opacity: 1;
   }
 }
-.btn-gray {
-  background: #eee;
-  color: #333;
-}
+
 #btn-deconnexion {
     width: 250px;
     height: 50px;
 }
+
 header {
     display: flex;
     align-items: flex-start;

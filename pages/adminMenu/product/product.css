@@ -44,3 +44,19 @@ td:nth-child(4) { /* stock */
 	padding: 6px 8px;
 	font-size: 12px;
 }
+
+/* Bouton œil visibilité */
+.btn-eye {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 4px 6px;
+	font-size: 16px;
+	color: #4060AD;
+	border-radius: 6px;
+	transition: color 0.2s, background 0.2s;
+}
+.btn-eye:hover {
+	background: #e8ecf8;
+	color: #222;
+}

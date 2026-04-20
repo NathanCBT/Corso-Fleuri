@@ -1,9 +1,10 @@
 import { cart, addToCart, calculateTotal, updateQuantity } from "./cart.js";
 import { initPayment, handleFinalPayment } from "./paymentController.js";
 
+const API_BASE = "http://localhost:3000/api";
+
 document.addEventListener("DOMContentLoaded", () => {
-  const btnGrandeFaim = document.getElementById("btn-grande-faim");
-  const btnPetiteFaim = document.getElementById("btn-petite-faim");
+  const topNav = document.querySelector(".top-nav");
   const btnProducts = document.getElementById("btn-products");
   const mainGrid = document.getElementById("main-grid");
   const cartContainer = document.getElementById("cart-container");
@@ -13,108 +14,141 @@ document.addEventListener("DOMContentLoaded", () => {
   const cancelBtn = document.getElementById("cancel-logout");
   const btnOpenLogout = document.getElementById("btn-deconnexion");
 
-  const menuOptions = {
-    starters: [{ name: "Taboulé" }, { name: "Carotte râpée" }],
-    mains: [
-      { name: "Kebab" },
-      { name: "Chipolatas" },
-      { name: "Merguez" },
-      { name: "Andouillette" },
-      { name: "Pépite de blé" },
-    ],
-    desserts: [{ name: "Flan" }, { name: "Glace" }, { name: "Tarte" }],
-  };
+  let allMenus = [];
+  let allProducts = [];
 
-  const singleProducts = [
-    { id: 101, name: "Frites", price: 3.5 },
-    { id: 102, name: "Sangria", price: 3 },
-    { id: 103, name: "Pichet de Sangria", price: 12 },
-    { id: 104, name: "Bouteille de vin", price: 12 },
-    { id: 105, name: "Coca Cola", price: 2 },
-    { id: 106, name: "Orangina", price: 2 },
-    { id: 107, name: "Perrier", price: 2 },
-    { id: 108, name: "Oasis Tropical", price: 2 },
-    { id: 109, name: "Oasis Thé Pêche", price: 2 },
-    { id: 110, name: "Café", price: 1 },
-  ];
+  async function loadData() {
+    try {
+      const [menusRes, productsRes] = await Promise.all([
+        fetch(`${API_BASE}/menus`),
+        fetch(`${API_BASE}/products`),
+      ]);
+      allMenus = (await menusRes.json()).filter(m => !!m.isVisible);
+      allProducts = (await productsRes.json()).filter(p => !!p.IsVisible);
 
-  let currentSelection = {
-    type: "",
-    starter: null,
-    main: null,
-    dessert: null,
-    price: 0,
-  };
+      generateMenuButtons();
 
-  function createIcon(className) {
-    const i = document.createElement("i");
-    i.className = className;
-    return i;
+      if (allMenus.length > 0) {
+        renderMenuDashboard(allMenus[0]);
+        const firstBtn = topNav.querySelector(".btn-cyan");
+        if (firstBtn) firstBtn.classList.add("active");
+      }
+    } catch (e) {
+      console.error("Erreur chargement données:", e);
+    }
   }
 
-  function renderSoloProducts(list) {
-    mainGrid.innerHTML = "";
-    const container = document.createElement("div");
-    container.className = "step-items-container";
+  function generateMenuButtons() {
+    topNav.innerHTML = "";
 
-    list.forEach((product) => {
-      const card = document.createElement("div");
-      card.className = "product-card solo-card";
-      const img = document.createElement("div");
-      img.className = "image-placeholder-large";
-      const info = document.createElement("div");
-      info.className = "product-info";
-      const name = document.createElement("span");
-      name.textContent = product.name;
-      const price = document.createElement("span");
-      price.textContent = `${product.price.toFixed(2)} €`;
-
-      info.append(name, price);
-      card.append(img, info);
-      card.onclick = () => addToCart(product, updateCartUI);
-      container.appendChild(card);
+    allMenus.forEach((menu) => {
+      const btn = document.createElement("button");
+      btn.className = "btn btn-cyan";
+      btn.textContent = menu.name;
+      btn.onclick = () => {
+        document
+          .querySelectorAll(".top-nav .btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderMenuDashboard(menu);
+      };
+      topNav.appendChild(btn);
     });
-    mainGrid.appendChild(container);
+
+    topNav.appendChild(btnProducts);
+    topNav.appendChild(btnOpenLogout);
   }
 
-  function renderMenuDashboard(type, price) {
-    currentSelection = {
-      type,
-      starter: null,
-      main: null,
-      dessert: null,
-      price,
-    };
+  function renderMenuDashboard(menuObject) {
     mainGrid.innerHTML = "";
+
+    const allowedIds = menuObject.articles.map((a) => a.id);
+    const menuProducts = allProducts.filter((p) => allowedIds.includes(p.Id));
+
+    const categories = {};
+    menuProducts.forEach((p) => {
+      const cat = p.CategoryName || "Autre";
+      if (!categories[cat]) categories[cat] = [];
+      categories[cat].push(p);
+    });
+
+    const catNames = Object.keys(categories);
+    const CAT_SORT = ['entr', 'dessert', 'boisson', 'plat'];
+    catNames.sort((a, b) => {
+      const ra = CAT_SORT.findIndex(k => a.toLowerCase().includes(k));
+      const rb = CAT_SORT.findIndex(k => b.toLowerCase().includes(k));
+      return (ra === -1 ? 99 : ra) - (rb === -1 ? 99 : rb);
+    });
+    const currentSelection = {};
+    catNames.forEach((c) => (currentSelection[c] = null));
+
     const dashboard = document.createElement("div");
     dashboard.className = "dashboard-container";
+
+    const title = document.createElement("h2");
+    title.style.textAlign = "center";
+    title.textContent = `Composition : ${menuObject.name}`;
+    dashboard.appendChild(title);
+
     const row = document.createElement("div");
     row.className = "dashboard-row";
 
-    row.appendChild(
-      createColumn("1. Entrées", menuOptions.starters, "starter"),
-    );
-    row.appendChild(createColumn("2. Plats", menuOptions.mains, "main"));
-    row.appendChild(
-      createColumn("3. Desserts", menuOptions.desserts, "dessert"),
-    );
+    catNames.forEach((catName) => {
+      const col = document.createElement("div");
+      col.className = "dashboard-column";
+
+      const h3 = document.createElement("h3");
+      h3.className = "column-title";
+      h3.textContent = catName;
+      col.appendChild(h3);
+
+      categories[catName].forEach((product) => {
+        const card = document.createElement("div");
+        card.className = "option-item-card";
+
+        // gérer le stock
+        const hasStock = product.Stock > 0;
+        if (!hasStock) {
+          card.classList.add("out-of-stock");
+          card.textContent = `${product.Name} (Épuisé)`;
+        } else {
+          card.textContent = product.Name;
+          card.onclick = () => {
+            col
+              .querySelectorAll(".option-item-card")
+              .forEach((c) => c.classList.remove("selected"));
+            card.classList.add("selected");
+            currentSelection[catName] = { id: product.Id, name: product.Name, category: product.CategoryName || "" };
+
+            const btnVal = document.getElementById("btn-validate-menu");
+            btnVal.disabled = !catNames.every((c) => currentSelection[c]);
+          };
+        }
+        col.appendChild(card);
+      });
+      row.appendChild(col);
+    });
 
     const footer = document.createElement("div");
     footer.className = "validation-area";
     const btnAdd = document.createElement("button");
     btnAdd.id = "btn-validate-menu";
     btnAdd.className = "btn-commander";
-    btnAdd.textContent = `Valider ${type} (${price.toFixed(2)} €)`;
+    btnAdd.textContent = `Valider ${menuObject.name} (${Number(menuObject.price).toFixed(2)} €)`;
     btnAdd.disabled = true;
+
     btnAdd.onclick = () => {
+      const parts = catNames.map((c) => currentSelection[c]);
       const finalMenu = {
-        id: Date.now(),
-        name: `${type} (${currentSelection.starter}, ${currentSelection.main}, ${currentSelection.dessert})`,
-        price: price,
+        id: menuObject.id,
+        name: `${menuObject.name} (${parts.map((p) => p.name).join(", ")})`,
+        price: Number(menuObject.price),
         quantity: 1,
+        type: "menu",
+        articles: parts,
       };
       addToCart(finalMenu, updateCartUI);
-      renderMenuDashboard(type, price);
+      renderMenuDashboard(menuObject); // reset l'interface de choix
     };
 
     footer.appendChild(btnAdd);
@@ -122,36 +156,45 @@ document.addEventListener("DOMContentLoaded", () => {
     mainGrid.appendChild(dashboard);
   }
 
-  function createColumn(title, items, key) {
-    const col = document.createElement("div");
-    col.className = "dashboard-column";
-    const h3 = document.createElement("h3");
-    h3.className = "column-title";
-    h3.textContent = title;
-    col.appendChild(h3);
+  function renderSoloProducts() {
+    mainGrid.innerHTML = "";
+    const container = document.createElement("div");
+    container.className = "step-items-container";
 
-    items.forEach((item) => {
+    allProducts.forEach((product) => {
       const card = document.createElement("div");
-      card.className = "option-item-card";
-      card.textContent = item.name;
-      card.onclick = () => {
-        col
-          .querySelectorAll(".option-item-card")
-          .forEach((c) => c.classList.remove("selected"));
-        card.classList.add("selected");
-        currentSelection[key] = item.name;
-        const btn = document.getElementById("btn-validate-menu");
-        if (
-          currentSelection.starter &&
-          currentSelection.main &&
-          currentSelection.dessert
-        ) {
-          btn.disabled = false;
-        }
-      };
-      col.appendChild(card);
+      card.className = "product-card solo-card";
+
+      const isOutOfStock = product.Stock <= 0;
+      if (isOutOfStock) card.classList.add("out-of-stock");
+
+      card.innerHTML = `
+        <div class="image-placeholder-large">
+            <i class="fa-solid ${isOutOfStock ? "fa-box-open" : "fa-utensils"}"></i>
+        </div>
+        <div class="product-info">
+          <span>${product.Name} ${isOutOfStock ? "(Épuisé)" : ""}</span>
+          <span>${Number(product.Price).toFixed(2)} €</span>
+        </div>
+      `;
+
+      if (!isOutOfStock) {
+        card.onclick = () =>
+          addToCart(
+            {
+              id: product.Id,
+              name: product.Name,
+              price: Number(product.Price),
+              type: "article",
+              category: product.CategoryName || "",
+            },
+            updateCartUI,
+          );
+      }
+
+      container.appendChild(card);
     });
-    return col;
+    mainGrid.appendChild(container);
   }
 
   function updateCartUI() {
@@ -159,37 +202,25 @@ document.addEventListener("DOMContentLoaded", () => {
     cart.forEach((item, index) => {
       const card = document.createElement("div");
       card.className = "cart-card";
-      const name = document.createElement("p");
-      name.className = "item-name";
-      name.textContent = item.name;
-      const price = document.createElement("p");
-      price.className = "item-price";
-      price.textContent = `${(item.price * item.quantity).toFixed(2)} €`;
-      const controls = document.createElement("div");
-      controls.className = "qty-controls";
-
-      const btnMinus = document.createElement("button");
-      btnMinus.className = "qty-btn-icon";
-      btnMinus.appendChild(createIcon("fa-solid fa-minus"));
-      btnMinus.onclick = () => {
+      card.innerHTML = `
+        <div class="item-details">
+            <p class="item-name">${item.name}</p>
+            <p class="item-price">${(item.price * item.quantity).toFixed(2)} €</p>
+        </div>
+        <div class="qty-controls">
+            <button class="btn-minus"><i class="fa-solid fa-minus"></i></button>
+            <span class="qty-value">${item.quantity}</span>
+            <button class="btn-plus"><i class="fa-solid fa-plus"></i></button>
+        </div>
+      `;
+      card.querySelector(".btn-minus").onclick = () => {
         updateQuantity(index, "moins");
         updateCartUI();
       };
-
-      const qty = document.createElement("span");
-      qty.className = "qty-value";
-      qty.textContent = item.quantity;
-
-      const btnPlus = document.createElement("button");
-      btnPlus.className = "qty-btn-icon";
-      btnPlus.appendChild(createIcon("fa-solid fa-plus"));
-      btnPlus.onclick = () => {
+      card.querySelector(".btn-plus").onclick = () => {
         updateQuantity(index, "plus");
         updateCartUI();
       };
-
-      controls.append(btnMinus, qty, btnPlus);
-      card.append(name, price, controls);
       cartContainer.appendChild(card);
     });
     totalDisplay.textContent = `${calculateTotal().toFixed(2)} €`;
@@ -198,13 +229,19 @@ document.addEventListener("DOMContentLoaded", () => {
   initPayment(updateCartUI);
   handleFinalPayment();
 
-  btnGrandeFaim.onclick = () => renderMenuDashboard("Grande Faim", 13.0);
-  btnPetiteFaim.onclick = () => renderMenuDashboard("Petite Faim", 10.0);
-  btnProducts.onclick = () => renderSoloProducts(singleProducts);
+  btnProducts.onclick = () => {
+    document
+      .querySelectorAll(".top-nav .btn")
+      .forEach((b) => b.classList.remove("active"));
+    btnProducts.classList.add("active");
+    renderSoloProducts();
+  };
+
   btnOpenLogout.onclick = () => (modalLogout.style.display = "flex");
   cancelBtn.onclick = () => (modalLogout.style.display = "none");
   confirmBtn.onclick = () => (window.location.href = "../form/form.html");
 
-  renderMenuDashboard("Grande Faim", 13.0);
-  updateCartUI();
+  loadData().then(() => {
+    updateCartUI();
+  });
 });

@@ -1,18 +1,151 @@
-import Menu from "../../../classes/Menu.js";
-import Product from "../../../classes/Product.js";
+const productTableBody = document.getElementById("product-table-body");
+const stockProductSelect = document.getElementById("stock-product-select");
+let editProductId = null;
 
-let productName = document.getElementById("product-name");
-let productBuyPrice = document.getElementById("product-buy-price");
-let productQuantity = document.getElementById("product-quantity");
-let productImage = document.getElementById("product-image");
-let productType = document.getElementById("product-type");
-let btnAddProduct = document.getElementById("btn-add-product");
+async function refresh() {
+  const response = await fetch("http://localhost:3000/api/products");
+  const products = await response.json();
 
-let productTableBody = document.getElementById("product-table-body");
-let stockProductSelect = document.getElementById("stock-product-select");
-let stockQuantityAdd = document.getElementById("stock-quantity-add");
-let btnAddStock = document.getElementById("btn-add-stock");
-let editIndex = null;
+  productTableBody.innerHTML = "";
+  products.forEach((p) => {
+    const tr = document.createElement("tr");
+    tr.style.opacity = p.IsVisible ? "1" : "0.45";
+
+    // Bouton oeil
+    const tdVisibility = document.createElement("td");
+    tdVisibility.style.width = "36px";
+    const eyeBtn = document.createElement("button");
+    eyeBtn.className = "btn-eye";
+    eyeBtn.title = p.IsVisible ? "Masquer du menu" : "Afficher dans le menu";
+    const eyeIcon = document.createElement("i");
+    eyeIcon.className = p.IsVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
+    eyeBtn.appendChild(eyeIcon);
+    eyeBtn.addEventListener("click", async () => {
+      const res = await fetch(`http://localhost:3000/api/products/${p.Id}/toggle-visibility`, {
+        method: "PATCH",
+      });
+      const data = await res.json();
+      if (data.success) {
+        eyeIcon.className = data.isVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
+        eyeBtn.title = data.isVisible ? "Masquer du menu" : "Afficher dans le menu";
+        tr.style.opacity = data.isVisible ? "1" : "0.45";
+      }
+    });
+    tdVisibility.appendChild(eyeBtn);
+
+    const tdName = document.createElement("td");
+    tdName.textContent = p.Name;
+
+    const tdCat = document.createElement("td");
+    tdCat.textContent = p.CategoryName;
+
+    const tdPrice = document.createElement("td");
+    tdPrice.textContent = `${p.Price}€`;
+
+    const tdStock = document.createElement("td");
+    tdStock.textContent = p.Stock;
+    if (p.Stock <= p.QuantityMin) {
+      tdStock.style.color = "red";
+      tdStock.style.fontWeight = "bold";
+    }
+
+    const editBtn = document.createElement("button");
+    editBtn.className = "btn primary";
+    editBtn.textContent = "Modifier";
+    editBtn.addEventListener("click", () =>
+      prepareEdit(p.Id, p.Name, p.Price, p.Stock, p.QuantityMin, p.IdCategory)
+    );
+
+    const delBtn = document.createElement("button");
+    delBtn.className = "btn danger";
+    delBtn.textContent = "Supprimer";
+    delBtn.addEventListener("click", () => deleteProd(p.Id));
+
+    const tdActions = document.createElement("td");
+    tdActions.appendChild(editBtn);
+    tdActions.appendChild(delBtn);
+
+    tr.appendChild(tdVisibility);
+    tr.appendChild(tdName);
+    tr.appendChild(tdCat);
+    tr.appendChild(tdPrice);
+    tr.appendChild(tdStock);
+    tr.appendChild(tdActions);
+    productTableBody.appendChild(tr);
+  });
+
+  stockProductSelect.innerHTML = '<option value="">Choisir un produit</option>';
+  products.forEach((p) => {
+    const opt = document.createElement("option");
+    opt.value = p.Id;
+    opt.textContent = p.Name;
+    stockProductSelect.appendChild(opt);
+  });
+}
+
+document
+  .getElementById("btn-add-product")
+  .addEventListener("click", async () => {
+    const data = {
+      name: document.getElementById("product-name").value,
+      price: parseFloat(document.getElementById("product-buy-price").value),
+      stock: parseInt(document.getElementById("product-quantity").value),
+      quantityMin: parseInt(
+        document.getElementById("product-quantity-limit").value,
+      ),
+      idCategory:
+        document.getElementById("product-type").value === "hot" ? 2 : 1,
+      hot: document.getElementById("product-type").value === "hot" ? 1 : 0,
+    };
+
+    const method = editProductId ? "PUT" : "POST";
+    const url = editProductId
+      ? `http://localhost:3000/api/products/${editProductId}`
+      : "http://localhost:3000/api/products";
+
+    await fetch(url, {
+      method: method,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    editProductId = null;
+    refresh();
+  });
+
+document.getElementById("btn-add-stock").addEventListener("click", async () => {
+  const id = stockProductSelect.value;
+  const quantity = parseInt(
+    document.getElementById("stock-quantity-add").value,
+  );
+
+  await fetch("http://localhost:3000/api/products/add-stock", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id, quantity }),
+  });
+  refresh();
+});
+
+window.deleteProd = async (id) => {
+  if (confirm("Supprimer ce produit ?")) {
+    await fetch(`http://localhost:3000/api/products/${id}`, {
+      method: "DELETE",
+    });
+    refresh();
+  }
+};
+
+window.prepareEdit = (id, name, price, stock, qMin, cat) => {
+  document.getElementById("product-name").value = name;
+  document.getElementById("product-buy-price").value = price;
+  document.getElementById("product-quantity").value = stock;
+  document.getElementById("product-quantity-limit").value = qMin;
+  editProductId = id;
+  window.scrollTo(0, 0);
+};
+
+refresh();
 
 document.addEventListener("DOMContentLoaded", () => {
   const modalLogout = document.getElementById("modal-logout");
@@ -20,145 +153,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const cancelBtn = document.getElementById("cancel-logout");
   const btnOpenLogout = document.getElementById("btn-deconnexion");
 
-  btnOpenLogout.onclick = () => {
-    modalLogout.style.display = "flex";
-  };
-
-  cancelBtn.onclick = () => {
-    modalLogout.style.display = "none";
-  };
-
-  confirmBtn.onclick = () => {
-    window.location.href = "../../form/form.html";
-  };
-});
-
-btnAddProduct.addEventListener("click", () => {
-  createOrUpdateProduct();
-  refreshTable();
-});
-btnAddStock.addEventListener("click", () => {
-  const index = stockProductSelect.value;
-  const qty = parseInt(stockQuantityAdd.value);
-
-  if (index !== "" && !isNaN(qty)) {
-    Product.productList[index].quantity += qty;
-    stockQuantityAdd.value = "";
-    refreshTable();
+  if (btnOpenLogout) {
+    btnOpenLogout.onclick = () => {
+      modalLogout.style.display = "flex";
+    };
+  }
+  if (cancelBtn) {
+    cancelBtn.onclick = () => {
+      modalLogout.style.display = "none";
+    };
+  }
+  if (confirmBtn) {
+    confirmBtn.onclick = () => {
+      window.location.href = "../../form/form.html";
+    };
   }
 });
-
-function createOrUpdateProduct() {
-  if (
-    productName.value != "" &&
-    productBuyPrice.value != "" &&
-    productQuantity.value != "" &&
-    productType.value != ""
-  ) {
-    if (editIndex === null) {
-      let product = new Product();
-      product.name = productName.value;
-      product.price = productBuyPrice.value;
-      product.quantity = parseInt(productQuantity.value);
-      product.img = productImage.value;
-      product.setType(productType.value);
-    } else {
-      let product = Product.productList[editIndex];
-      product.name = productName.value;
-      product.price = productBuyPrice.value;
-      product.quantity = parseInt(productQuantity.value);
-      product.img = productImage.value;
-      product.setType(productType.value);
-
-      editIndex = null;
-    }
-
-    resetForm();
-  }
-}
-
-function resetForm() {
-  productName.value = "";
-  productBuyPrice.value = "";
-  productQuantity.value = "";
-  productImage.value = "";
-  productType.selectedIndex = 0;
-}
-
-function refreshTable() {
-  productTableBody.textContent = "";
-
-  Product.productList.forEach((product, index) => {
-    const newTr = document.createElement("tr");
-
-    let tdName = document.createElement("td");
-    tdName.textContent = product.name;
-
-    let tdType = document.createElement("td");
-    tdType.textContent = product.type;
-
-    let tdPrice = document.createElement("td");
-    tdPrice.textContent = product.price;
-
-    let tdQuantity = document.createElement("td");
-    tdQuantity.textContent = product.quantity;
-
-    let tdActions = document.createElement("td");
-    tdActions.classList.add("actions");
-
-    let btnActivate = document.createElement("button");
-    btnActivate.textContent = product.isActive ? "Désactiver" : "Activer";
-    btnActivate.classList.add("btn", "secondary");
-
-    btnActivate.addEventListener("click", () => {
-      product.isActive = !product.isActive;
-      refreshTable();
-    });
-
-    let btnModify = document.createElement("button");
-    btnModify.textContent = "Modifier";
-    btnModify.classList.add("btn", "primary");
-
-    btnModify.addEventListener("click", () => {
-      productName.value = product.name;
-      productBuyPrice.value = product.price;
-      productQuantity.value = product.quantity;
-      productType.value = product.type;
-
-      editIndex = index;
-    });
-
-    let btnDelete = document.createElement("button");
-    btnDelete.textContent = "Supprimer";
-    btnDelete.classList.add("btn", "danger");
-
-    btnDelete.addEventListener("click", () => {
-      Product.productList.splice(index, 1);
-      refreshTable();
-      refreshStockSelect();
-    });
-
-    tdActions.appendChild(btnActivate);
-    tdActions.appendChild(btnModify);
-    tdActions.appendChild(btnDelete);
-
-    newTr.appendChild(tdName);
-    newTr.appendChild(tdType);
-    newTr.appendChild(tdPrice);
-    newTr.appendChild(tdQuantity);
-    newTr.appendChild(tdActions);
-
-    productTableBody.appendChild(newTr);
-  });
-  refreshStockSelect();
-}
-function refreshStockSelect() {
-  stockProductSelect.textContent =
-    '<option value="">Choisir un produit</option>';
-  Product.productList.forEach((product, index) => {
-    const option = document.createElement("option");
-    option.value = index;
-    option.textContent = product.name;
-    stockProductSelect.appendChild(option);
-  });
-}
